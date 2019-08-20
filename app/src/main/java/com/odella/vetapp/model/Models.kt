@@ -1,0 +1,144 @@
+package com.odella.vetapp.model
+
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+
+class Pet {
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("Pet_ID")
+    @Expose
+    var petID: Int? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+    @SerializedName("Age")
+    @Expose
+    var age: String? = null
+    @SerializedName("Genus")
+    @Expose
+    var genus: String? = null
+    @SerializedName("Breed")
+    @Expose
+    var breed: String? = null
+    @SerializedName("Gender")
+    @Expose
+    var gender: String? = null
+    @SerializedName("Neutered")
+    @Expose
+    var neutered: Boolean? = null
+    @SerializedName("Owner_ID")
+    @Expose
+    var ownerID: String? = null
+}
+class Vet {
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+    @SerializedName("ID")
+    @Expose
+    private var iD: Int? = null
+    @SerializedName("Specialty")
+    @Expose
+    var specialty: String? = null
+    @SerializedName("Cell_Phone")
+    @Expose
+    var cellPhone: String? = null
+    @SerializedName("On_Call")
+    @Expose
+    var onCall: String? = null
+    @SerializedName("Time")
+    @Expose
+    var time: String? = null
+    @SerializedName("Days_Off")
+    @Expose
+    var daysOff: String? = null
+    @SerializedName("Username")
+    @Expose
+    var username: String? = null
+    @SerializedName("Password")
+    @Expose
+    var password: String? = null
+}
+class Owner {
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("Member_ID")
+    @Expose
+    var memberID: Int? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+    @SerializedName("Member_Start")
+    @Expose
+    var memberStart: String? = null
+    @SerializedName("Cell_Phone")
+    @Expose
+    var cellPhone: String? = null
+    @SerializedName("Home_Phone")
+    @Expose
+    var homePhone: String? = null
+    @SerializedName("Email")
+    @Expose
+    var email: String? = null
+    @SerializedName("Address")
+    @Expose
+    var address: String? = null
+    @SerializedName("Username")
+    @Expose
+    var username: String? = null
+    @SerializedName("Password")
+    @Expose
+    var password: String? = null
+}
+class Vacc {
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+    @SerializedName("Genus")
+    @Expose
+    var genus: String? = null
+    @SerializedName("Price")
+    @Expose
+    var price: Float? = null
+    @SerializedName("Dosis_Less_16_Weeks")
+    @Expose
+    var dosisLess16Weeks: String? = null
+    @SerializedName("Dosis_More_16_Weeks")
+    @Expose
+    var dosisMore16Weeks: String? = null
+    @SerializedName("Frequency")
+    @Expose
+    var frequency: String? = null
+}
+class Med {
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+    @SerializedName("Category")
+    @Expose
+    var category: String? = null
+    @SerializedName("Pills")
+    @Expose
+    var pills: Int? = null
+    @SerializedName("Volume")
+    @Expose
+    var volume: Int? = null
+    @SerializedName("Concentration")
+    @Expose
+    var concentration: Int? = null
+    @SerializedName("Price")
+    @Expose
+    var price: Float? = null
+}
