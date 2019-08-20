@@ -18,6 +18,9 @@ interface NetworkService {
         fun login(@Body request: RequestBody): Call<Any>
 
     //GETS
+    @GET("login/check")
+        fun checkConnection(): Call<Any>
+
     @GET("pets")
     fun getPets(@Header("Authorization") token: String): Call<List<Pet>>
 
