@@ -19,7 +19,7 @@ interface NetworkService {
 
     //GETS
     @GET("login/check")
-        fun checkConnection(): Call<Any>
+        fun checkConnection(): Call<Void>
 
     @GET("pets")
     fun getPets(@Header("Authorization") token: String): Call<List<Pet>>

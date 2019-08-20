@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkConnection(){
-        networkService.checkConnection().enqueue(object: Callback<Any> {
-            override fun onFailure(call: Call<Any>, t: Throwable) {
+        networkService.checkConnection().enqueue(object: Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
                 MaterialDialog(this@MainActivity).show{
                     title(R.string.network_error)
                     positiveButton(R.string.try_again) {
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 login()
             }
 

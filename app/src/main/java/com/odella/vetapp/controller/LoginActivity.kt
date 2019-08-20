@@ -1,6 +1,5 @@
 package com.odella.vetapp.controller
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
@@ -8,7 +7,7 @@ import android.widget.Toast.LENGTH_SHORT
 import android.widget.Toast.makeText
 import androidx.lifecycle.ViewModelProviders
 import com.odella.vetapp.R
-import com.odella.vetapp.constants.TokenSingelton
+import com.odella.vetapp.constants.TokenSingleton
 import com.odella.vetapp.service.NetworkService
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.MediaType
@@ -62,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 if(response.code() == 200){
-                    TokenSingelton.actualToken = "Bearer "  + response.body().toString()
+                    TokenSingleton.actualToken = "Bearer "  + response.body().toString()
                     login()
                 } else {
                     makeText(this@LoginActivity, "Invalid user", LENGTH_SHORT).show()
