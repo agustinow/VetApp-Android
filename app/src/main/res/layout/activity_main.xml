@@ -8,10 +8,11 @@
         tools:context=".controller.MainActivity" android:background="@color/colorBackground">
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/vet_logo"
-            android:id="@+id/imgLogo" android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgLogo"
+            android:contentDescription="@string/logo"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.499"
-            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent" android:elevation="20dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:elevation="20dp"
+            android:scaleType="fitCenter" android:background="@drawable/vet_logo"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
