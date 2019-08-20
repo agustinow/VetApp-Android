@@ -2,6 +2,7 @@ package com.odella.vetapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.odella.vetapp.service.NetworkService
 
 class MainActivity : AppCompatActivity() {
 
