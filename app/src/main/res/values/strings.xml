@@ -3,4 +3,5 @@
     <string name="try_again">Try again</string>
     <string name="close">Close</string>
     <string name="network_error">Network error</string>
+    <string name="logo">logo</string>
 </resources>

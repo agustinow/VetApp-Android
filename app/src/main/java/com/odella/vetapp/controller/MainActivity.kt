@@ -8,6 +8,9 @@ import com.afollestad.materialdialogs.MaterialDialog
 
 import com.odella.vetapp.R
 import com.odella.vetapp.service.NetworkService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         networkService = NetworkService.create()
-        checkConnection()
+        GlobalScope.launch{
+            delay(1000L)
+            checkConnection()
+        }
     }
 
     fun checkConnection(){

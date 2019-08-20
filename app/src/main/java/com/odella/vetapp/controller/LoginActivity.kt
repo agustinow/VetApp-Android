@@ -1,5 +1,7 @@
 package com.odella.vetapp.controller
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
@@ -7,6 +9,8 @@ import android.widget.Toast.LENGTH_SHORT
 import android.widget.Toast.makeText
 import androidx.lifecycle.ViewModelProviders
 import com.odella.vetapp.R
+import com.odella.vetapp.constants.PREFS_NAME
+import com.odella.vetapp.constants.PREFS_USERNAME
 import com.odella.vetapp.constants.TokenSingleton
 import com.odella.vetapp.service.NetworkService
 import kotlinx.android.synthetic.main.activity_login.*
@@ -22,25 +26,38 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        model = ViewModelProviders.of(this@LoginActivity)[LoginViewModel::class.java]
 
-        btnLogIn.setOnClickListener {
-            tryToConnect(txtUsername.text.toString(), txtPassword.text.toString())
+        val pref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getString(PREFS_USERNAME, "")
+        if(pref.isNullOrEmpty()){
+            model.rememberMe = false
+            chkRememberMe.isChecked = false
+        } else {
+            model.rememberMe = true
+            chkRememberMe.isChecked = true
+            txtUsername.setText(pref)
+            txtPassword.requestFocus()
         }
 
-        model = ViewModelProviders.of(this@LoginActivity)[LoginViewModel::class.java]
+        btnLogIn.setOnClickListener {
+            model.username = txtUsername.text.toString()
+            model.password = txtPassword.text.toString()
+            tryToConnect(model.username, model.password)
+        }
+
         switchPassword.isChecked = model.passwordVisible
 
         switchPassword.setOnClickListener {
             if(model.passwordVisible){
                 model.passwordVisible = false
-                var start = txtPassword.selectionStart
-                var end = txtPassword.selectionEnd
+                val start = txtPassword.selectionStart
+                val end = txtPassword.selectionEnd
                 txtPassword.transformationMethod = PasswordTransformationMethod()
                 txtPassword.setSelection(start, end)
             } else {
                 model.passwordVisible = true
-                var start = txtPassword.selectionStart
-                var end = txtPassword.selectionEnd
+                val start = txtPassword.selectionStart
+                val end = txtPassword.selectionEnd
                 txtPassword.transformationMethod = null
                 txtPassword.setSelection(start, end)
 
@@ -75,7 +92,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun login(){
-        makeText(this@LoginActivity, "Bien", LENGTH_SHORT).show()
+        makeText(this@LoginActivity, "Good", LENGTH_SHORT).show()
+        if(chkRememberMe.isChecked) {
+            getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putString(PREFS_USERNAME, model.username)
+                .apply()
+        } else {
+            getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putString(PREFS_USERNAME, "")
+                .apply()
+        }
         //val intent = Intent(this@LoginActivity, ClientMainActivity::class.java)
         //startActivity(intent)
     }
