@@ -20,11 +20,11 @@ class VetFragmentManager(private val context: Context, fm: FragmentManager) : Fr
                 return frag
             }
             1 -> {
-                val frag = ConsultFragment.newInstance()
+                val frag = PetsFragment.newInstance()
                 return frag
             }
             2 -> {
-                val frag = ConsultFragment.newInstance()
+                val frag = MembersFragment.newInstance()
                 return frag
             }
         }
