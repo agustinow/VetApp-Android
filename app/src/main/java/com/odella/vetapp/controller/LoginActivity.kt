@@ -1,6 +1,7 @@
 package com.odella.vetapp.controller
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -190,17 +191,14 @@ class LoginActivity : AppCompatActivity() {
 
     @ExperimentalStdlibApi
     fun login(){
-        makeText(this@LoginActivity, "Good", LENGTH_SHORT).show()
         if(chkRememberMe.isChecked) {
             encryptAndSave(txtUsername.text.toString())
         } else {
             encryptAndSave("")
         }
-        //val intent = Intent(this@LoginActivity, ClientMainActivity::class.java)
-        //startActivity(intent)
+        val intent = Intent(this@LoginActivity, VetActivity::class.java)
+        startActivity(intent)
     }
-
-
 }
 
 

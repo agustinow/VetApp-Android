@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navigation_pets"
+          android:title="@string/pets"
+          android:icon="@drawable/listPets" />
+    <item android:id="@+id/navigation_consult"
+          android:title="@string/consultation"
+          android:icon="@drawable/consult" />
+    <item android:id="@+id/navigation_members"
+          android:title="@string/members"
+          android:icon="@drawable/listMembers" />
+</menu>
