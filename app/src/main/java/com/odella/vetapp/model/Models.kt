@@ -32,38 +32,7 @@ class Pet {
     @Expose
     var ownerID: String? = null
 }
-class Vet {
-    @SerializedName("id")
-    @Expose
-    var id: String? = null
-    @SerializedName("Name")
-    @Expose
-    var name: String? = null
-    @SerializedName("ID")
-    @Expose
-    private var iD: Int? = null
-    @SerializedName("Specialty")
-    @Expose
-    var specialty: String? = null
-    @SerializedName("Cell_Phone")
-    @Expose
-    var cellPhone: String? = null
-    @SerializedName("On_Call")
-    @Expose
-    var onCall: String? = null
-    @SerializedName("Time")
-    @Expose
-    var time: String? = null
-    @SerializedName("Days_Off")
-    @Expose
-    var daysOff: String? = null
-    @SerializedName("Username")
-    @Expose
-    var username: String? = null
-    @SerializedName("Password")
-    @Expose
-    var password: String? = null
-}
+
 class Owner {
     @SerializedName("id")
     @Expose
@@ -96,6 +65,64 @@ class Owner {
     @Expose
     var password: String? = null
 }
+
+class Vet {
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+    @SerializedName("ID")
+    @Expose
+    var iD: Int? = null
+    @SerializedName("Specialty")
+    @Expose
+    var specialty: String? = null
+    @SerializedName("Cell_Phone")
+    @Expose
+    var cellPhone: String? = null
+    @SerializedName("On_Call")
+    @Expose
+    var onCall: String? = null
+    @SerializedName("Time")
+    @Expose
+    var time: String? = null
+    @SerializedName("Days_Off")
+    @Expose
+    var daysOff: String? = null
+    @SerializedName("Username")
+    @Expose
+    var username: String? = null
+    @SerializedName("Password")
+    @Expose
+    var password: String? = null
+}
+
+class Med {
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+    @SerializedName("Category")
+    @Expose
+    var category: String? = null
+    @SerializedName("Pills")
+    @Expose
+    var pills: Int? = null
+    @SerializedName("Volume")
+    @Expose
+    var volume: Int? = null
+    @SerializedName("Concentration")
+    @Expose
+    var concentration: Int? = null
+    @SerializedName("Price")
+    @Expose
+    var price: Float? = null
+}
+
 class Vacc {
     @SerializedName("id")
     @Expose
@@ -119,26 +146,60 @@ class Vacc {
     @Expose
     var frequency: String? = null
 }
-class Med {
+
+class Type {
     @SerializedName("id")
     @Expose
     var id: String? = null
-    @SerializedName("Name")
+    @SerializedName("Number")
     @Expose
-    var name: String? = null
-    @SerializedName("Category")
+    var number: Int? = null
+    @SerializedName("Type")
     @Expose
-    var category: String? = null
-    @SerializedName("Pills")
+    var type: String? = null
+}
+
+class Payment {
+    @SerializedName("id")
     @Expose
-    var pills: Int? = null
-    @SerializedName("Volume")
+    var id: String? = null
+    @SerializedName("OwnerID")
     @Expose
-    var volume: Int? = null
-    @SerializedName("Concentration")
+    var ownerID: String? = null
+    @SerializedName("Date")
     @Expose
-    var concentration: Int? = null
-    @SerializedName("Price")
+    var date: String? = null
+    @SerializedName("Amount")
     @Expose
-    var price: Float? = null
+    var amount: String? = null
+    @SerializedName("Type")
+    @Expose
+    var type: Int? = null
+    @SerializedName("IsPaid")
+    @Expose
+    var isPaid: Boolean? = null
+}
+
+class Consult {
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
+    @SerializedName("PetID")
+    @Expose
+    var petID: String? = null
+    @SerializedName("VetID")
+    @Expose
+    var vetID: String? = null
+    @SerializedName("Date")
+    @Expose
+    var date: String? = null
+    @SerializedName("Message")
+    @Expose
+    var message: String? = null
+    @SerializedName("Meds")
+    @Expose
+    var meds: List<Med>? = null
+    @SerializedName("Vaccs")
+    @Expose
+    var vaccs: List<Vacc>? = null
 }

@@ -14,22 +14,18 @@ class VetFragmentManager(private val context: Context, fm: FragmentManager) : Fr
     )
 
     override fun getItem(position: Int): Fragment {
-        when (position) {
+        return when (position) {
             0 -> {
-                val frag = ConsultFragment.newInstance()
-                return frag
+                ConsultFragment.newInstance()
             }
             1 -> {
-                val frag = PetsFragment.newInstance()
-                return frag
+                PetsFragment.newInstance()
             }
             2 -> {
-                val frag = MembersFragment.newInstance()
-                return frag
+                MembersFragment.newInstance()
             }
+            else -> ConsultFragment.newInstance()
         }
-        val frag = ConsultFragment.newInstance()
-        return frag
     }
 
     override fun getCount(): Int {
