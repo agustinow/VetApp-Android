@@ -23,7 +23,7 @@ class MembersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consult, container, false)
+        return inflater.inflate(R.layout.fragment_members, container, false)
     }
 
 
@@ -31,6 +31,6 @@ class MembersFragment : Fragment() {
 
 
         @JvmStatic
-        fun newInstance() = ConsultFragment()
+        fun newInstance() = MembersFragment()
     }
 }
