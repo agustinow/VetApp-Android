@@ -175,6 +175,8 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                 if(response.code() == 200){
                     UserSingleton.actualToken = "Bearer "  + response.body()!!.token
+                    UserSingleton.userType = response.body()!!.type
+                    UserSingleton.userID = response.body()!!.id
                     login()
                 } else {
                     makeText(this@LoginActivity, "Invalid credentials", LENGTH_SHORT).show()
@@ -194,7 +196,12 @@ class LoginActivity : AppCompatActivity() {
         } else {
             encryptAndSave("")
         }
-        val intent = Intent(this@LoginActivity, VetActivity::class.java)
+        val intent = when(UserSingleton.userType) {
+            "vet" -> Intent(this@LoginActivity, VetActivity::class.java)
+            "owner" -> TODO()
+            "admin" -> TODO()
+            else -> TODO()
+        }
         startActivity(intent)
     }
 }

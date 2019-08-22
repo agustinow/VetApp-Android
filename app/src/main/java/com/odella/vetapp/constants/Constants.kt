@@ -13,5 +13,6 @@ open class UserSingleton{
     companion object  {
         var actualToken: String = ""
         var userType: String? = null
+        var userID: String? = null
     }
 }
