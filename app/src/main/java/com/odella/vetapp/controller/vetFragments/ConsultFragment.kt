@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.odella.vetapp.R
 import com.odella.vetapp.controller.vetFragments.vetConsultFragments.ConsultFragmentManager
 import kotlinx.android.synthetic.main.fragment_consult.*
+import kotlinx.android.synthetic.main.fragment_consult.view.*
 
 
 class ConsultFragment : Fragment() {
@@ -20,8 +21,8 @@ class ConsultFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        tabs.setupWithViewPager(view_pager)
-        tabs.getTabAt(1)!!.icon = resources.getDrawable(R.drawable.time, resources.newTheme())
+
+        //tabs.getTabAt(1)!!.icon = resources.getDrawable(R.drawable.time, resources.newTheme())
     }
 
     override fun onCreateView(
@@ -29,7 +30,16 @@ class ConsultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consult, container, false)
+        val root = inflater.inflate(R.layout.fragment_consult, container, false)
+
+        //LOGIC
+        root.view_pager.adapter = ConsultFragmentManager(context!!, activity!!.supportFragmentManager)
+        root.tabs.setupWithViewPager(root.view_pager)
+        //root.tabs.getTabAt(1)!!.icon = resources.getDrawable(R.drawable.time, resources.newTheme())
+        //END LOGIC
+
+        return root
+
     }
 
     companion object {

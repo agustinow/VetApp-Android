@@ -9,8 +9,9 @@ const val TRANSFORMATION = "AES/GCM/NoPadding"
 const val ANDROID_KEYSTORE = "AndroidKeyStore"
 const val DEFAULT_IV = "elodelllajue"
 
-open class TokenSingleton{
+open class UserSingleton{
     companion object  {
         var actualToken: String = ""
+        var userType: String? = null
     }
 }
