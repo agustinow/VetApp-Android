@@ -33,7 +33,6 @@ class ByNameConsultFragment : Fragment() {
         // Inflate the layout for this fragment
 
         var root = inflater.inflate(R.layout.fragment_by_name_consult, container, false)
-        TODO()
         return root
 
     }
