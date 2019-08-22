@@ -26,13 +26,13 @@ class VetActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.navigation_consult->{
-                sectionsPagerAdapter.getItemPosition(0)
+                TODO()
             }
             R.id.navigation_pets->{
-                sectionsPagerAdapter.getItemPosition(1)
+                TODO()
             }
             R.id.navigation_members->{
-                sectionsPagerAdapter.getItemPosition(2)
+                TODO()
             }
 
         }
