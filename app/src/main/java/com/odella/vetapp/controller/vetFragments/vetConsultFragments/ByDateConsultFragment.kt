@@ -9,19 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.odella.vetapp.R
-import com.odella.vetapp.controller.vetFragments.vetConsultFragments.ConsultFragmentManager
-import kotlinx.android.synthetic.main.fragment_consult.*
 
-
-class ConsultFragment : Fragment() {
-
-
-    lateinit var consultFragmentManager: ConsultFragmentManager
+class ByDateConsultFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        tabs.setupWithViewPager(view_pager)
-        tabs.getTabAt(1)!!.icon = resources.getDrawable(R.drawable.time, resources.newTheme())
+
     }
 
     override fun onCreateView(
@@ -29,12 +22,12 @@ class ConsultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consult, container, false)
+        return inflater.inflate(R.layout.fragment_by_date_consult, container, false)
     }
 
-    companion object {
 
+    companion object {
         @JvmStatic
-        fun newInstance() = ConsultFragment()
+        fun newInstance() = ByDateConsultFragment()
     }
 }
