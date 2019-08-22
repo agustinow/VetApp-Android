@@ -21,6 +21,21 @@ interface NetworkService {
     @GET("login/check")
         fun checkConnection(): Call<Void>
 
+    @GET("consults")
+        fun getAllConsults(): Call<List<Consult>>
+
+    @GET("consultsof/{id}")
+        fun getAllConsultsOf(@Path("id") path: Int): Call<List<Consult>>
+
+    @GET("consultsfor/{id}")
+        fun getAllConsultsFor(@Path("id") path: Int): Call<List<Consult>>
+
+    @GET("consultsof/{id}")
+        fun getAllConsultsOfOID(@Path("id") path: String): Call<List<Consult>>
+
+    @GET("consultsfor/{id}")
+        fun getAllConsultsForOID(@Path("id") path: String): Call<List<Consult>>
+
     @GET("pets")
     fun getPets(@Header("Authorization") token: String): Call<List<Pet>>
 
