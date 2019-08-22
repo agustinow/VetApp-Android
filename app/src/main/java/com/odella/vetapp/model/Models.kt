@@ -210,4 +210,7 @@ class TokenResponse {
     @SerializedName("token")
     @Expose
     var token: String? = null
+    @SerializedName("id")
+    @Expose
+    var id: String? = null
 }
