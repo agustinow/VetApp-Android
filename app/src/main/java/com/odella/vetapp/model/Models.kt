@@ -2,6 +2,7 @@ package com.odella.vetapp.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 class Pet {
     @SerializedName("id")
@@ -192,7 +193,7 @@ class Consult {
     var vetID: String? = null
     @SerializedName("Date")
     @Expose
-    var date: String? = null
+    var date: Date? = null
     @SerializedName("Message")
     @Expose
     var message: String? = null

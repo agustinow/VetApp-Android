@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.odella.vetapp.R
 import com.odella.vetapp.model.Consult
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ConsultsAdapter(val context: Context, val onClick: (Consult) -> (Unit)) : RecyclerView.Adapter<ConsultsAdapter.ViewHolder>() {
     var consults : List<Consult> = listOf()
@@ -35,15 +37,22 @@ class ConsultsAdapter(val context: Context, val onClick: (Consult) -> (Unit)) : 
         return differ.currentList.size
     }
 
+    fun setDifferList(){
+        //TEMPORARY, HAVE TO MAKE THE FILTER
+        this.differ.submitList(consults)
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val consult = differ.currentList[holder.adapterPosition]
         holder.txtNamePet.text = consult.petName
         holder.txtNameVet.text = consult.vetName
+        holder.txtNamePet.visibility = View.VISIBLE
+        holder.txtNameVet.visibility = View.GONE
         holder.imgPill.visibility = if(consult.meds!!.isEmpty()) View.INVISIBLE
         else View.VISIBLE
         holder.imgVacc.visibility = if(consult.vaccs!!.isEmpty()) View.INVISIBLE
         else View.VISIBLE
-        holder.txtDate.text = consult.date
+        holder.txtDate.text = SimpleDateFormat("MM/dd/yyyy").format(consult.date!!)
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
