@@ -11,7 +11,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/frameLayout">
+            app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/activity_vet_framebottom">
 
 
         <!-- Main content -->
@@ -27,12 +27,17 @@
                 app:menu="@menu/bottom_navigation_menu"/>
 
     </FrameLayout>
-    <androidx.viewpager.widget.ViewPager
+
+    <FrameLayout
+            android:id="@+id/activiy_vet_content"
             android:layout_width="0dp"
-            android:layout_height="0dp" app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/activity_vet_framebottom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-            app:layout_constraintStart_toStartOf="parent" android:id="@+id/view_pager_fragments"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
