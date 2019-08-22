@@ -22,12 +22,12 @@ class PetsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consult, container, false)
+        return inflater.inflate(R.layout.fragment_pets, container, false)
     }
 
 
     companion object {
         @JvmStatic
-        fun newInstance() = ConsultFragment()
+        fun newInstance() = PetsFragment()
     }
 }
