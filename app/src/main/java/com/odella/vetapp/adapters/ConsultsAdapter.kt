@@ -14,7 +14,8 @@ import com.odella.vetapp.R
 import com.odella.vetapp.model.Consult
 
 class ConsultsAdapter(val context: Context, val onClick: (Consult) -> (Unit)) : RecyclerView.Adapter<ConsultsAdapter.ViewHolder>() {
-    val consults : List<Consult> = listOf()
+    var consults : List<Consult> = listOf()
+
     val differ = AsyncListDiffer(this@ConsultsAdapter, object: DiffUtil.ItemCallback<Consult>(){
         override fun areItemsTheSame(oldItem: Consult, newItem: Consult): Boolean {
             return oldItem.id == newItem.id
@@ -36,8 +37,13 @@ class ConsultsAdapter(val context: Context, val onClick: (Consult) -> (Unit)) : 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val consult = differ.currentList[holder.adapterPosition]
-        holder
-        TODO()
+        holder.txtNamePet.text = consult.petName
+        holder.txtNameVet.text = consult.vetName
+        holder.imgPill.visibility = if(consult.meds!!.isEmpty()) View.INVISIBLE
+        else View.VISIBLE
+        holder.imgVacc.visibility = if(consult.vaccs!!.isEmpty()) View.INVISIBLE
+        else View.VISIBLE
+        holder.txtDate.text = consult.date
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){

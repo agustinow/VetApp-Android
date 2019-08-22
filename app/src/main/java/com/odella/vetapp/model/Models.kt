@@ -202,6 +202,12 @@ class Consult {
     @SerializedName("Vaccs")
     @Expose
     var vaccs: List<Vacc>? = null
+    @SerializedName("VetName")
+    @Expose
+    var vetName: String? = null
+    @SerializedName("PetName")
+    @Expose
+    var petName: String? = null
 }
 class TokenResponse {
     @SerializedName("type")
