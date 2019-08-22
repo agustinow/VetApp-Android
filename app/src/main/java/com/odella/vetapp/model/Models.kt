@@ -203,3 +203,11 @@ class Consult {
     @Expose
     var vaccs: List<Vacc>? = null
 }
+class TokenResponse {
+    @SerializedName("type")
+    @Expose
+    var type: String? = null
+    @SerializedName("token")
+    @Expose
+    var token: String? = null
+}

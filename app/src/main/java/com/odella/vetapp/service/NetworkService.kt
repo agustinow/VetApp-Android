@@ -15,7 +15,7 @@ interface NetworkService {
     //LOGIN
     @Headers("Content-Type: application/json")
     @POST("login/request")
-        fun login(@Body request: RequestBody): Call<Any>
+        fun login(@Body request: RequestBody): Call<TokenResponse>
 
     //GETS
     @GET("login/check")

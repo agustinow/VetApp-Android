@@ -2,7 +2,6 @@ package com.odella.vetapp.controller
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.security.keystore.KeyGenParameterSpec
@@ -14,6 +13,7 @@ import android.widget.Toast.makeText
 import androidx.lifecycle.ViewModelProviders
 import com.odella.vetapp.R
 import com.odella.vetapp.constants.*
+import com.odella.vetapp.model.TokenResponse
 import com.odella.vetapp.service.NetworkService
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.MediaType
@@ -26,8 +26,6 @@ import java.security.KeyStore
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.spec.GCMParameterSpec
-import java.security.SecureRandom
-import javax.crypto.spec.IvParameterSpec
 
 
 class LoginActivity : AppCompatActivity() {
@@ -169,14 +167,14 @@ class LoginActivity : AppCompatActivity() {
         request.put("Password", password)
         val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json"), request.toString())
         val call = NetworkService.create().login(requestBody)
-        call.enqueue(object: Callback<Any> {
-            override fun onFailure(call: Call<Any>, t: Throwable) {
+        call.enqueue(object: Callback<TokenResponse> {
+            override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
                 makeText(this@LoginActivity, "Impossible to connect", LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+            override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                 if(response.code() == 200){
-                    TokenSingleton.actualToken = "Bearer "  + response.body().toString()
+                    UserSingleton.actualToken = "Bearer "  + response.body()!!.token
                     login()
                 } else {
                     makeText(this@LoginActivity, "Invalid credentials", LENGTH_SHORT).show()
