@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+    <ImageView
+            android:id="@+id/element_pet_img_genus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_paw24dp" />
+
+    <TextView
+            android:id="@+id/element_pet_txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/element_pet_txt_owner"
+            app:layout_constraintStart_toEndOf="@+id/element_pet_img_genus"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Perrín" />
+
+    <TextView
+            android:id="@+id/element_pet_txt_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/element_pet_txt_name"
+            app:layout_constraintTop_toBottomOf="@+id/element_pet_txt_name"
+            tools:text="John Doe" />
+
+    <ImageButton
+            android:id="@+id/element_pet_btn_right_arrow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/icon_arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

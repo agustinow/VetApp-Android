@@ -32,6 +32,9 @@ class Pet {
     @SerializedName("Owner_ID")
     @Expose
     var ownerID: String? = null
+    @SerializedName("Owner_Name")
+    @Expose
+    var ownerName: String? = null
 }
 
 class Owner {

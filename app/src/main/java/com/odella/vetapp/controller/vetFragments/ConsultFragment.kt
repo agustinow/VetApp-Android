@@ -35,7 +35,7 @@ class ConsultFragment : Fragment() {
         //LOGIC
         root.view_pager.adapter = ConsultFragmentManager(context!!, activity!!.supportFragmentManager)
         root.tabs.setupWithViewPager(root.view_pager)
-        //root.tabs.getTabAt(1)!!.icon = resources.getDrawable(R.drawable.time, resources.newTheme())
+        root.tabs.getTabAt(1)!!.icon = resources.getDrawable(R.drawable.time, resources.newTheme())
         //END LOGIC
 
         return root

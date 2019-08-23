@@ -19,25 +19,37 @@ interface NetworkService {
 
     //GETS
     @GET("login/check")
-        fun checkConnection(): Call<Void>
+    fun checkConnection(): Call<Void>
 
     @GET("consults")
-        fun getAllConsults(): Call<List<Consult>>
+    fun getAllConsults(): Call<List<Consult>>
 
     @GET("consultsof/{id}")
-        fun getAllConsultsOf(@Path("id") path: Int): Call<List<Consult>>
+    fun getAllConsultsOf(@Path("id") path: Int): Call<List<Consult>>
 
     @GET("consultsfor/{id}")
-        fun getAllConsultsFor(@Path("id") path: Int): Call<List<Consult>>
+    fun getAllConsultsFor(@Path("id") path: Int): Call<List<Consult>>
 
     @GET("consultsof/{id}")
-        fun getAllConsultsOfOID(@Path("id") path: String): Call<List<Consult>>
+    fun getAllConsultsOfOID(@Path("id") path: String): Call<List<Consult>>
 
     @GET("consultsfor/{id}")
-        fun getAllConsultsForOID(@Path("id") path: String): Call<List<Consult>>
+    fun getAllConsultsForOID(@Path("id") path: String): Call<List<Consult>>
 
     @GET("pets")
     fun getPets(@Header("Authorization") token: String): Call<List<Pet>>
+
+    @GET("petsattendedby/{id}")
+    fun getPetsAttendedBy(@Path("id") path: Int): Call<List<Pet>>
+
+    @GET("petsattendedby/{id}")
+    fun getPetsAttendedByOID(@Path("id") path: String): Call<List<Pet>>
+
+    @GET("pets/{id}")
+    fun getPet(@Path("id") path: Int): Call<Pet>
+
+    @GET("pets/{id}")
+    fun getPet(@Path("id") path: String): Call<Pet>
 
     @GET("vets")
     fun getVets(@Header("Authorization") token: String): Call<List<Vet>>
@@ -50,6 +62,10 @@ interface NetworkService {
 
     @GET("owners")
     fun getOwners(@Header("Authorization") token: String): Call<List<Owner>>
+
+
+    //POSTS
+
 
     //Static
     companion object Factory{
