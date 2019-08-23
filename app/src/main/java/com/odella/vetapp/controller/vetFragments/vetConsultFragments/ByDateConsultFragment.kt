@@ -47,7 +47,12 @@ class ByDateConsultFragment : Fragment() {
 
     fun loadData(){
         adapter = ConsultsAdapter(context!!) {
+
+
         }
+
+
+
         NetworkService.create().getAllConsultsOfOID(UserSingleton.userID!!).enqueue(object:
             Callback<List<Consult>> {
             override fun onFailure(call: Call<List<Consult>>, t: Throwable) {
