@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.odella.vetapp.R
+import com.odella.vetapp.constants.SEE_ALL_NAMES
+import com.odella.vetapp.constants.SEE_ONLY_PET
+import com.odella.vetapp.constants.SEE_ONLY_VET
 import com.odella.vetapp.model.Consult
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ConsultsAdapter(val context: Context, val onClick: (Consult) -> (Unit)) : RecyclerView.Adapter<ConsultsAdapter.ViewHolder>() {
+class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult) -> (Unit)) : RecyclerView.Adapter<ConsultsAdapter.ViewHolder>() {
+
     var consults : List<Consult> = listOf()
 
     val differ = AsyncListDiffer(this@ConsultsAdapter, object: DiffUtil.ItemCallback<Consult>(){
@@ -46,8 +50,14 @@ class ConsultsAdapter(val context: Context, val onClick: (Consult) -> (Unit)) : 
         val consult = differ.currentList[holder.adapterPosition]
         holder.txtNamePet.text = consult.petName
         holder.txtNameVet.text = consult.vetName
-        holder.txtNamePet.visibility = View.VISIBLE
-        holder.txtNameVet.visibility = View.GONE
+        when (mode) {
+            SEE_ALL_NAMES -> {
+                holder.txtNameVet.visibility = View.VISIBLE
+                holder.txtNamePet.visibility = View.VISIBLE
+            }
+            SEE_ONLY_PET -> holder.txtNamePet.visibility = View.VISIBLE
+            SEE_ONLY_VET -> holder.txtNameVet.visibility = View.VISIBLE
+        }
         holder.imgPill.visibility = if(consult.meds!!.isEmpty()) View.INVISIBLE
         else View.VISIBLE
         holder.imgVacc.visibility = if(consult.vaccs!!.isEmpty()) View.INVISIBLE

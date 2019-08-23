@@ -54,14 +54,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             val cipher = Cipher.getInstance(TRANSFORMATION)
-            /*
-            val iv = ByteArray(12)
-            val e = SecureRandom()
-            e.nextBytes(iv)
-            */
 
             val key = keyStore.getKey(PREFS_USERNAME, null)
-            //val gcmParams = GCMParameterSpec(128, iv)
             cipher.init(Cipher.ENCRYPT_MODE, key)
             val bytesOfUser = userIn.encodeToByteArray()
             var encodedBytes = cipher.doFinal(bytesOfUser)
@@ -100,17 +94,6 @@ class LoginActivity : AppCompatActivity() {
         cipher.init(Cipher.DECRYPT_MODE, key, GCMParameterSpec(128, Base64.decode(iv, Base64.DEFAULT)))
         val decodedBytes = cipher.doFinal(Base64.decode(encrypted, Base64.NO_PADDING))
         return decodedBytes.decodeToString()
-/*
-        val keyStore = KeyStore.getInstance(ANDROID_KEYSTORE)
-        keyStore.load(null)
-        val secretKeyEntry = keyStore.getEntry(PREFS_USERNAME, null) as KeyStore.SecretKeyEntry
-        val secretKey = secretKeyEntry.secretKey
-        val cipher = Cipher.getInstance(TRANSFORMATION)
-        val spec = GCMParameterSpec(128, Base64.decode(iv, Base64.DEFAULT))
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, spec)
-        val username = cipher.doFinal(Base64.decode(encrypted, Base64.DEFAULT))
-        return Base64.encodeToString(username, Base64.DEFAULT)
- */
     }
 
 
