@@ -25,6 +25,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="sans-serif-light"
             android:textSize="18sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/element_consult_img_animal"
             app:layout_constraintTop_toBottomOf="@+id/element_consult_txt_pet_name"

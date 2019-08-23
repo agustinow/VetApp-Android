@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.odella.vetapp.R
 import com.odella.vetapp.adapters.ConsultsAdapter
+import com.odella.vetapp.constants.SEE_ALL_NAMES
+import com.odella.vetapp.constants.SEE_ONLY_PET
 import com.odella.vetapp.constants.UserSingleton
 import com.odella.vetapp.model.Consult
 import com.odella.vetapp.service.NetworkService
@@ -45,15 +47,24 @@ class ByDateConsultFragment : Fragment() {
         return root
     }
 
-    fun loadData(){
-        adapter = ConsultsAdapter(context!!) {
-
+    private fun loadData(){
+        val mode = when(UserSingleton.userType){
+            "vet" -> SEE_ONLY_PET
+            "owner" -> SEE_ALL_NAMES
+            "admin" -> SEE_ALL_NAMES
+            else -> SEE_ALL_NAMES
+        }
+        adapter = ConsultsAdapter(context!!, mode) {
 
         }
 
 
-
-        NetworkService.create().getAllConsultsOfOID(UserSingleton.userID!!).enqueue(object:
+        val call = when(UserSingleton.userType){
+            "vet" -> NetworkService.create().getAllConsultsOfOID(UserSingleton.userID!!)
+            "owner" -> TODO()
+            else -> NetworkService.create().getAllConsults()
+        }
+        call.enqueue(object:
             Callback<List<Consult>> {
             override fun onFailure(call: Call<List<Consult>>, t: Throwable) {
                 Toast.makeText(context!!, "Network error", Toast.LENGTH_SHORT).show()

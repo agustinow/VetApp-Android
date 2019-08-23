@@ -26,7 +26,6 @@ class VetActivity : AppCompatActivity() {
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
-
         selectFragment(it)
         false
     }
