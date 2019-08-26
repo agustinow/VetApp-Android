@@ -7,11 +7,13 @@ const val PREFS_IV = "iv"
 const val PREFS_PASSWORD = "password"
 const val TRANSFORMATION = "AES/GCM/NoPadding"
 const val ANDROID_KEYSTORE = "AndroidKeyStore"
-const val DEFAULT_IV = "elodelllajue"
 const val SEE_ALL_NAMES = 0
 const val SEE_ONLY_PET = 1
 const val SEE_ONLY_VET = 2
 const val SEE_NOTHING = 3
+const val PET_ID="id"
+
+//THIS IS AN EASTER EGG HUEHUEHUE
 
 open class UserSingleton{
     companion object  {

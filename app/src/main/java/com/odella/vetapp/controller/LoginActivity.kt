@@ -102,8 +102,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         model = ViewModelProviders.of(this@LoginActivity)[LoginViewModel::class.java]
-
-        //val username = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getString(PREFS_USERNAME, "")
         val username = decryptUsername()
 
 

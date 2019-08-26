@@ -1,6 +1,8 @@
 package com.odella.vetapp.controller.vetFragments.vetConsultFragments
 
+import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.odella.vetapp.R
 import com.odella.vetapp.adapters.ConsultsAdapter
+import com.odella.vetapp.constants.PET_ID
 import com.odella.vetapp.constants.SEE_ALL_NAMES
 import com.odella.vetapp.constants.SEE_ONLY_PET
 import com.odella.vetapp.constants.UserSingleton
@@ -55,7 +58,9 @@ class ByDateConsultFragment : Fragment() {
             else -> SEE_ALL_NAMES
         }
         adapter = ConsultsAdapter(context!!, mode) {
-
+            var intent = Intent(context!!, PetDialog::class.java)
+            intent.putExtra(PET_ID,it.id)
+            startActivity(intent)
         }
 
 
@@ -83,8 +88,6 @@ class ByDateConsultFragment : Fragment() {
 
         })
     }
-
-
 
     companion object {
         @JvmStatic
