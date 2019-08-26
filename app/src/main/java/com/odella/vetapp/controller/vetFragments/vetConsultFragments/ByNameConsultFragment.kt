@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.odella.vetapp.R
 import com.odella.vetapp.adapters.ConsultsAdapter
 import com.odella.vetapp.adapters.PetsAdapter
 import com.odella.vetapp.constants.UserSingleton
+import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Consult
 import com.odella.vetapp.model.Pet
 import com.odella.vetapp.service.NetworkService
@@ -26,6 +28,7 @@ import retrofit2.Response
 class ByNameConsultFragment : Fragment() {
     lateinit var adapter: PetsAdapter
     lateinit var root: View
+    lateinit var model: VetViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +42,7 @@ class ByNameConsultFragment : Fragment() {
         // Inflate the layout for this fragment
 
         root = inflater.inflate(R.layout.fragment_by_name_consult, container, false)
-
+        model = ViewModelProviders.of(this@ByNameConsultFragment)[VetViewModel::class.java]
         //LOGIC
         loadData()
         //END LOGIC
@@ -50,23 +53,14 @@ class ByNameConsultFragment : Fragment() {
 
     fun loadData(){
         adapter = PetsAdapter(context!!)
-        NetworkService.create().getPetsAttendedByOID(UserSingleton.userID!!).enqueue(object: Callback<List<Pet>>{
-            override fun onFailure(call: Call<List<Pet>>, t: Throwable) {
-                Toast.makeText(context!!, "Network error", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onResponse(call: Call<List<Pet>>, response: Response<List<Pet>>) {
-                if(response.code() == 200) {
-                    adapter.pets = response.body()!!
-                    root.fragment_by_name_consult_recycler.adapter = adapter
-                    root.fragment_by_name_consult_recycler.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
-                    adapter.setDifferList()
-                } else {
-                    Toast.makeText(context!!, "Error", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        })
+        if(model.consultByNameList != null) {
+            adapter.pets = model.consultByNameList!!.toList()
+        } else{
+            Toast.makeText(context!!, "No data found", Toast.LENGTH_SHORT).show()
+            root.txtNoData.visibility = View.VISIBLE
+            root.fragment_by_name_consult_recycler.visibility = View.INVISIBLE
+            root.fragment_by_name_consult_search.visibility = View.INVISIBLE
+        }
     }
 
 
