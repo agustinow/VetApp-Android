@@ -1,13 +1,11 @@
 package com.odella.vetapp.controller.vetFragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.odella.vetapp.R
 
 class PetsFragment : Fragment() {
@@ -24,6 +22,15 @@ class PetsFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_pets, container, false)
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        Toast.makeText(context, "puto", Toast.LENGTH_SHORT).show()
+    }
+
+
 
 
     companion object {

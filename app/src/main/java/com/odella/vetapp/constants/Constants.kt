@@ -12,6 +12,9 @@ const val SEE_ALL_NAMES = 0
 const val SEE_ONLY_PET = 1
 const val SEE_ONLY_VET = 2
 const val SEE_NOTHING = 3
+const val STATUS_UNFINISHED = 0
+const val STATUS_ERROR = 2
+const val STATUS_FINISHED = 1
 
 open class UserSingleton{
     companion object  {

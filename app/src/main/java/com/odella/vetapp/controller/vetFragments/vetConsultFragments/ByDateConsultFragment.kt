@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import com.odella.vetapp.adapters.ConsultsAdapter
 import com.odella.vetapp.adapters.PetsAdapter
 import com.odella.vetapp.constants.SEE_ALL_NAMES
 import com.odella.vetapp.constants.SEE_ONLY_PET
+import com.odella.vetapp.constants.STATUS_FINISHED
 import com.odella.vetapp.constants.UserSingleton
 import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Consult
@@ -42,9 +44,17 @@ class ByDateConsultFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_by_date_consult, container, false)
-        model = ViewModelProviders.of(this@ByDateConsultFragment)[VetViewModel::class.java]
+        model = ViewModelProviders.of(activity!!)[VetViewModel::class.java]
         //LOGIC
-        loadData()
+        model.consultByDateStatus.observe(viewLifecycleOwner, Observer<Int> {
+            if(it == STATUS_FINISHED && !model.consultByDateList.isNullOrEmpty()){
+                loadData()
+            } else {
+                root.txtNoData.visibility = View.VISIBLE
+                root.fragment_by_date_consult_recycler.visibility = View.INVISIBLE
+                root.fragment_by_date_consult_search.visibility = View.INVISIBLE
+            }
+        })
         //END LOGIC
 
         return root
@@ -58,14 +68,14 @@ class ByDateConsultFragment : Fragment() {
 
             }
         }
-        if(model.consultByDateList != null) {
-            adapter.consults = model.consultByDateList!!.toList()
-        } else{
-            Toast.makeText(context!!, "No data found", Toast.LENGTH_SHORT).show()
-            root.txtNoData.visibility = View.VISIBLE
-            root.fragment_by_date_consult_recycler.visibility = View.INVISIBLE
-            root.fragment_by_date_consult_search.visibility = View.INVISIBLE
-        }
+        model.consultByDateList
+        adapter.consults = model.consultByDateList!!.toList()
+        adapter.setDifferList()
+        root.txtNoData.visibility = View.GONE
+        root.fragment_by_date_consult_recycler.visibility = View.VISIBLE
+        root.fragment_by_date_consult_recycler.adapter = adapter
+        root.fragment_by_date_consult_recycler.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
+        root.fragment_by_date_consult_search.visibility = View.VISIBLE
     }
 
 

@@ -30,7 +30,7 @@ import javax.crypto.spec.GCMParameterSpec
 
 class LoginActivity : AppCompatActivity() {
     lateinit var model: LoginViewModel
-
+    lateinit var preUsername: String
 
     @ExperimentalStdlibApi
     private fun encryptAndSave(userIn: String){
@@ -104,25 +104,40 @@ class LoginActivity : AppCompatActivity() {
         model = ViewModelProviders.of(this@LoginActivity)[LoginViewModel::class.java]
 
         //val username = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getString(PREFS_USERNAME, "")
-        val username = decryptUsername()
+        preUsername = decryptUsername()
 
 
-        if(username.isNullOrEmpty()){
+        if(preUsername.isNullOrEmpty()){
+            // NO PREVIOUS REMEMBER ME
             model.rememberMe = false
             chkRememberMe.isChecked = false
+            btnLogIn.setOnClickListener {
+                model.username = txtUsername.text.toString()
+                model.password = txtPassword.text.toString()
+                tryToConnect(model.username, model.password)
+            }
+            txtUsername.requestFocus()
         } else {
+            // PREVIOUS REMEMBER ME
             model.rememberMe = true
             chkRememberMe.isChecked = true
-            txtUsername.setText(username)
+            var stringUsername = "${preUsername[0]}${preUsername[1]}"
+            for(i in 0..preUsername.length-3){
+                stringUsername = "$stringUsername*"
+            }
+            txtUsername.hint = stringUsername
+            //txtUsername.setText(username)
             txtPassword.requestFocus()
+            btnLogIn.setOnClickListener {
+                model.username = if(txtUsername.text.isEmpty()){
+                    preUsername
+                } else {
+                    txtUsername.text.toString()
+                }
+                model.password = txtPassword.text.toString()
+                tryToConnect(model.username, model.password)
+            }
         }
-
-        btnLogIn.setOnClickListener {
-            model.username = txtUsername.text.toString()
-            model.password = txtPassword.text.toString()
-            tryToConnect(model.username, model.password)
-        }
-
         switchPassword.isChecked = model.passwordVisible
 
         switchPassword.setOnClickListener {
@@ -175,7 +190,8 @@ class LoginActivity : AppCompatActivity() {
     @ExperimentalStdlibApi
     fun login(){
         if(chkRememberMe.isChecked) {
-            encryptAndSave(txtUsername.text.toString())
+            if(txtUsername.text.isEmpty()) encryptAndSave(preUsername)
+            else encryptAndSave(txtUsername.text.toString())
         } else {
             encryptAndSave("")
         }

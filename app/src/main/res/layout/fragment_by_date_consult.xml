@@ -32,6 +32,7 @@
             android:fontFamily="sans-serif-light"
             android:text="No data to display"
             android:textSize="30sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
