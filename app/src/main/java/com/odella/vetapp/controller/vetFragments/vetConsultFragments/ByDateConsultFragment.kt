@@ -22,7 +22,6 @@ import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Consult
 import com.odella.vetapp.service.NetworkService
 import kotlinx.android.synthetic.main.fragment_by_date_consult.view.*
-import kotlinx.android.synthetic.main.fragment_by_name_consult.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,8 +63,8 @@ class ByDateConsultFragment : Fragment() {
         } else{
             Toast.makeText(context!!, "No data found", Toast.LENGTH_SHORT).show()
             root.txtNoData.visibility = View.VISIBLE
-            root.fragment_by_name_consult_recycler.visibility = View.INVISIBLE
-            root.fragment_by_name_consult_search.visibility = View.INVISIBLE
+            root.fragment_by_date_consult_recycler.visibility = View.INVISIBLE
+            root.fragment_by_date_consult_search.visibility = View.INVISIBLE
         }
     }
 
