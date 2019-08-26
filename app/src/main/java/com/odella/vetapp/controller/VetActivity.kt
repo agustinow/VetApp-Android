@@ -5,6 +5,11 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.odella.vetapp.R
+import com.odella.vetapp.constants.STATUS_UNFINISHED
+import com.odella.vetapp.controller.vetFragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.odella.vetapp.R
 import com.odella.vetapp.controller.vetFragments.ConsultFragment
@@ -20,6 +25,9 @@ class VetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vet)
         val navView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        val model: VetViewModel = ViewModelProviders.of(this@VetActivity)[VetViewModel::class.java]
+        model.consultByDateStatus.value = STATUS_UNFINISHED
+        model.consultByNameStatus.value = STATUS_UNFINISHED
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         sectionsPagerAdapter = VetFragmentManager(this@VetActivity, supportFragmentManager)
        // view_pager_fragments.adapter = sectionsPagerAdapter
