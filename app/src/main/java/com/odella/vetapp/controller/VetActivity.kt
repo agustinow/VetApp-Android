@@ -53,4 +53,10 @@ class VetActivity : AppCompatActivity() {
         }
     }
 
+    fun changeFragment(frag:Fragment){
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
+        ft.commit()
+    }
+
 }

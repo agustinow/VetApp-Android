@@ -44,19 +44,19 @@ class ViewConsultFragment : Fragment() {
             override fun onResponse(call: Call<Consult>, response: Response<Consult>) {
                 if (response.isSuccessful) {
                     val consult = response.body()
-                    txtDialogPetName.text = consult?.petName!!.toString()
-                    txtDialogVetName.text = consult?.vetName!!.toString()
-                    txtDialogDesc.text = consult?.message!!.toString()
+                    txtDialogPetName.text = consult?.petName.toString()
+                    txtDialogVetName.text = consult?.vetName.toString()
+                    txtDialogDesc.text = consult?.message.toString()
                     txtDialogDate.text = consult?.date.toString()
 
 
                     var arrayMeds: ArrayList<Med> = arrayListOf()
                     var arrayVaccs: ArrayList<Vacc> = arrayListOf()
 
-                    consult.meds!!.forEach {
+                    consult?.meds!!.forEach {
                         arrayMeds.add(it)
                     }
-                    consult.vaccs!!.forEach {
+                    consult?.vaccs!!.forEach {
                         arrayVaccs.add(it)
                     }
 
@@ -68,8 +68,11 @@ class ViewConsultFragment : Fragment() {
             }
 
         })
+    }
 
-
+    companion object {
+        @JvmStatic
+        fun newInstance() = ViewConsultFragment()
     }
 }
 

@@ -66,6 +66,10 @@ class ByDateConsultFragment : Fragment() {
             "vet" -> ConsultsAdapter(context!!, SEE_ONLY_PET) {
                 consultModel.idConsult= it.id!!
                 //llamar fragmento ViewConsultFragment
+                var frag:Fragment=ViewConsultFragment.newInstance()
+                val ft = parentFragment!!.fragmentManager!!.beginTransaction()
+                ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
+                ft.commit()
             }
             else -> ConsultsAdapter(context!!, SEE_ALL_NAMES) {
 
@@ -80,8 +84,6 @@ class ByDateConsultFragment : Fragment() {
         root.fragment_by_date_consult_recycler.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
         root.fragment_by_date_consult_search.visibility = View.VISIBLE
     }
-
-
 
     companion object {
         @JvmStatic
