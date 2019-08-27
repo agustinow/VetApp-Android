@@ -57,6 +57,16 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
             }
             SEE_ONLY_PET -> holder.txtNamePet.visibility = View.VISIBLE
             SEE_ONLY_VET -> holder.txtNameVet.visibility = View.VISIBLE
+            else -> {
+                holder.txtNamePet.text = SimpleDateFormat("MM/dd/yyyy").format(consult.date!!)
+                holder.txtNamePet.visibility = View.VISIBLE
+                holder.txtDate.visibility = View.GONE
+                val density = context.resources.displayMetrics.density;
+                holder.imgPill.layoutParams.height = (45 * density).toInt()
+                holder.imgPill.layoutParams.width = (45 * density).toInt()
+                holder.imgVacc.layoutParams.height = (45 * density).toInt()
+                holder.imgVacc.layoutParams.width = (45 * density).toInt()
+            }
         }
         holder.imgPill.visibility = if(consult.meds!!.isEmpty()) View.INVISIBLE
         else View.VISIBLE

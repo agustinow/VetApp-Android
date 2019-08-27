@@ -99,11 +99,6 @@ class ConsultFragment : Fragment() {
         view.view_pager.adapter = ConsultFragmentManager(context!!, childFragmentManager!!)
         view.tabs.setupWithViewPager(view.view_pager)
         //view.tabs.getTabAt(1)!!.icon = resources.getDrawable(R.drawable.time, resources.newTheme())
-        view.btnNewConsult.setOnClickListener()
-        {
-            //NUEVA CONSULTA MEME
-            //HACER YA
-        }
     }
 
 

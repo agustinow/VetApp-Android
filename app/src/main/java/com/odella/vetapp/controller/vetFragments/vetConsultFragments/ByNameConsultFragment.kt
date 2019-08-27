@@ -11,10 +11,13 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.odella.vetapp.R
 import com.odella.vetapp.adapters.ConsultsAdapter
 import com.odella.vetapp.adapters.PetsAdapter
+import com.odella.vetapp.constants.SEE_NOTHING
+import com.odella.vetapp.constants.SEE_ONLY_PET
 import com.odella.vetapp.constants.STATUS_FINISHED
 import com.odella.vetapp.constants.UserSingleton
 import com.odella.vetapp.controller.vetFragments.VetViewModel
@@ -22,13 +25,14 @@ import com.odella.vetapp.model.Consult
 import com.odella.vetapp.model.Pet
 import com.odella.vetapp.service.NetworkService
 import kotlinx.android.synthetic.main.fragment_by_name_consult.view.*
+import kotlinx.android.synthetic.main.fragment_consult.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ByNameConsultFragment : Fragment() {
     lateinit var adapter: PetsAdapter
-    lateinit var root: View
+    lateinit var conAdapter: ConsultsAdapter
     lateinit var model: VetViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,35 +46,59 @@ class ByNameConsultFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        root = inflater.inflate(R.layout.fragment_by_name_consult, container, false)
+        return inflater.inflate(R.layout.fragment_by_name_consult, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         model = ViewModelProviders.of(activity!!)[VetViewModel::class.java]
-        //LOGIC
         model.consultByNameStatus.observe(viewLifecycleOwner, Observer<Int> {
             if(it == STATUS_FINISHED && !model.consultByNameList.isNullOrEmpty()){
                 loadData()
             } else {
-                root.txtNoData.visibility = View.VISIBLE
-                root.fragment_by_name_consult_recycler.visibility = View.INVISIBLE
-                root.fragment_by_name_consult_search.visibility = View.INVISIBLE
+                view.txtNoData.visibility = View.VISIBLE
+                view.fragment_by_name_consult_recycler.visibility = View.INVISIBLE
+                view.fragment_by_name_consult_search.visibility = View.INVISIBLE
             }
         })
-        //END LOGIC
-
-        return root
-
+        view!!.btn_by_name_back.setOnClickListener {
+            changeToPetList()
+        }
     }
-
     fun loadData(){
-        adapter = PetsAdapter(context!!)
+        adapter = PetsAdapter(context!!) {
+            changeToConsultList(it)
+        }
         adapter.pets = model.consultByNameList!!.toList()
         adapter.setDifferList()
-        root.txtNoData.visibility = View.GONE
-        root.fragment_by_name_consult_recycler.visibility = View.VISIBLE
-        root.fragment_by_name_consult_recycler.adapter = adapter
-        root.fragment_by_name_consult_recycler.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
-        root.fragment_by_name_consult_search.visibility = View.VISIBLE
+        view!!.txtNoData.visibility = View.GONE
+        view!!.fragment_by_name_consult_recycler.visibility = View.VISIBLE
+        view!!.fragment_by_name_consult_recycler.adapter = adapter
+        view!!.fragment_by_name_consult_recycler.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
+        view!!.fragment_by_name_consult_search.visibility = View.VISIBLE
     }
 
+    fun changeToConsultList(pet: Pet){
+        conAdapter = ConsultsAdapter(context!!, SEE_NOTHING){
+            //OPEN INFO
+        }
+        val preFilteredConsults= model.consultByDateList!!.toList()
+        var finalConsults = mutableListOf<Consult>()
+        for (consult in preFilteredConsults){
+            if(consult.petID == pet.id) finalConsults.add(consult)
+        }
+        conAdapter.consults = finalConsults
+        conAdapter.setDifferList()
+        view!!.fragment_by_name_consult_recycler.adapter = conAdapter
+        view!!.btnNewConsult.visibility = View.VISIBLE
+        view!!.btn_by_name_back.visibility = View.VISIBLE
+    }
+
+    fun changeToPetList(){
+        view!!.fragment_by_name_consult_recycler.adapter = adapter
+        view!!.btnNewConsult.visibility = View.GONE
+        view!!.btn_by_name_back.visibility = View.GONE
+    }
 
     companion object {
         @JvmStatic
