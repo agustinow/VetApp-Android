@@ -63,6 +63,9 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
         holder.imgVacc.visibility = if(consult.vaccs!!.isEmpty()) View.INVISIBLE
         else View.VISIBLE
         holder.txtDate.text = SimpleDateFormat("MM/dd/yyyy").format(consult.date!!)
+        holder.layout.setOnClickListener{
+            onClick(consult)
+        }
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){

@@ -32,6 +32,7 @@ class ByDateConsultFragment : Fragment() {
     lateinit var adapter: ConsultsAdapter
     lateinit var root: View
     lateinit var model: VetViewModel
+    lateinit var consultModel: VetConsultViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +64,8 @@ class ByDateConsultFragment : Fragment() {
     private fun loadData(){
         adapter = when(UserSingleton.userType!!){
             "vet" -> ConsultsAdapter(context!!, SEE_ONLY_PET) {
+                consultModel.idConsult= it.id!!
+                //llamar fragmento ViewConsultFragment
             }
             else -> ConsultsAdapter(context!!, SEE_ALL_NAMES) {
 

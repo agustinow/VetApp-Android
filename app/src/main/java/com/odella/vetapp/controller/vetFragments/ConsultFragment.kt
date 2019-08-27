@@ -49,8 +49,7 @@ class ConsultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //LOGIC
-        model = ViewModelProviders.of(activity!!)[VetViewModel::
-        class.java]
+        model = ViewModelProviders.of(activity!!)[VetViewModel::class.java]
 
         if(model.consultByNameStatus.value != STATUS_FINISHED || model.consultByDateStatus.value != STATUS_FINISHED) {
             view!!.consult_progress_bar.visibility = View.VISIBLE

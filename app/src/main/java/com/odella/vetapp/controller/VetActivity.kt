@@ -10,8 +10,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.odella.vetapp.R
 import com.odella.vetapp.constants.STATUS_UNFINISHED
 import com.odella.vetapp.controller.vetFragments.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.odella.vetapp.R
 import com.odella.vetapp.controller.vetFragments.ConsultFragment
 import com.odella.vetapp.controller.vetFragments.MembersFragment
 import com.odella.vetapp.controller.vetFragments.PetsFragment
