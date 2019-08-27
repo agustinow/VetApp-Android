@@ -65,6 +65,10 @@ class ByDateConsultFragment : Fragment() {
             "vet" -> ConsultsAdapter(context!!, SEE_ONLY_PET) {
                 model.idConsult= it.id!!
                 //llamar fragmento ViewConsultFragment
+                var frag:Fragment=ViewConsultFragment.newInstance()
+                val ft = parentFragment!!.fragmentManager!!.beginTransaction()
+                ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
+                ft.commit()
             }
             else -> ConsultsAdapter(context!!, SEE_ALL_NAMES) {
 
@@ -91,8 +95,6 @@ class ByDateConsultFragment : Fragment() {
             }
         })
     }
-
-
 
     companion object {
         @JvmStatic
