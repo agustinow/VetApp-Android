@@ -87,8 +87,7 @@ class ByNameConsultFragment : Fragment() {
         for (consult in preFilteredConsults){
             if(consult.petID == pet.id) finalConsults.add(consult)
         }
-        conAdapter.consults = finalConsults
-        conAdapter.setDifferList()
+        conAdapter.setItems(finalConsults)
         view!!.fragment_by_name_consult_recycler.adapter = conAdapter
         view!!.btnNewConsult.visibility = View.VISIBLE
         view!!.btn_by_name_back.visibility = View.VISIBLE

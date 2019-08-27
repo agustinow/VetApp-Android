@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 
 import com.odella.vetapp.R
+import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Consult
 import com.odella.vetapp.model.Med
 import com.odella.vetapp.model.Vacc
@@ -19,7 +20,7 @@ import retrofit2.Response
 import java.util.ArrayList
 
 class ViewConsultFragment : Fragment() {
-    lateinit var model: VetConsultViewModel
+    lateinit var model: VetViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

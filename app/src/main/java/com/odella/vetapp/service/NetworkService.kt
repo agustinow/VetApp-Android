@@ -1,5 +1,6 @@
 package com.odella.vetapp.service
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.odella.vetapp.constants.BASE_URL
 import com.odella.vetapp.model.*
@@ -72,7 +73,7 @@ interface NetworkService {
 
     //Static
     companion object Factory{
-        var gson = GsonBuilder().setLenient().create()
+        var gson: Gson = GsonBuilder().setLenient().create()
         fun create(): NetworkService {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
