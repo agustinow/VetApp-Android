@@ -8,13 +8,14 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.odella.vetapp.R
 import com.odella.vetapp.model.Pet
 
-class PetsAdapter(val context: Context) : RecyclerView.Adapter<PetsAdapter.ViewHolder>(){
+class PetsAdapter(val context: Context, val onClick: (Pet) -> (Unit)) : RecyclerView.Adapter<PetsAdapter.ViewHolder>(){
     var pets: List<Pet> = listOf()
     val differ = AsyncListDiffer<Pet>(this@PetsAdapter, object: DiffUtil.ItemCallback<Pet>(){
         override fun areItemsTheSame(oldItem: Pet, newItem: Pet): Boolean {
@@ -50,11 +51,15 @@ class PetsAdapter(val context: Context) : RecyclerView.Adapter<PetsAdapter.ViewH
         holder.btnRightArrow.setOnClickListener {
             Toast.makeText(context, "You clicked on ${pet.name}", Toast.LENGTH_SHORT).show()
         }
+        holder.layout.setOnClickListener{
+            onClick(pet)
+        }
         //END LOGIC
     }
 
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
+        val layout: ConstraintLayout = itemView!!.findViewById(R.id.element_pet_layout)
         val imgPet: ImageView = itemView!!.findViewById(R.id.element_pet_img_genus)
         val txtName: TextView = itemView!!.findViewById(R.id.element_pet_txt_name)
         val txtOwner: TextView = itemView!!.findViewById(R.id.element_pet_txt_owner)

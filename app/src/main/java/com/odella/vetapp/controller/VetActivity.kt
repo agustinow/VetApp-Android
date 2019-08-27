@@ -1,22 +1,18 @@
 package com.odella.vetapp.controller
 
-import androidx.appcompat.app.AppCompatActivity
+import  androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.odella.vetapp.R
 import com.odella.vetapp.constants.STATUS_UNFINISHED
 import com.odella.vetapp.controller.vetFragments.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.odella.vetapp.R
 import com.odella.vetapp.controller.vetFragments.ConsultFragment
 import com.odella.vetapp.controller.vetFragments.MembersFragment
 import com.odella.vetapp.controller.vetFragments.PetsFragment
 import com.odella.vetapp.controller.vetFragments.VetFragmentManager
-import kotlinx.android.synthetic.main.activity_vet.*
 
 class VetActivity : AppCompatActivity() {
     lateinit var sectionsPagerAdapter: VetFragmentManager
