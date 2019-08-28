@@ -52,35 +52,33 @@ class MakeConsultFragment : Fragment() {
                 override fun onResponse(call: Call<List<Med>>, response: Response<List<Med>>) {
                     if (response.isSuccessful) {
                     }
-                        meds=response.body()!!
-                        val selectedList = ArrayList<Int>()
-                        val builder = AlertDialog.Builder(context!!)
-                        var arrayMeds: MutableList<String> = mutableListOf()
-                        meds.forEach(){
-                            arrayMeds.add(it.name!!)
-                        }
-                    builder.setTitle("Medicine List")
-                        builder.setMultiChoiceItems(arrayOf(arrayMeds) as Array<CharSequence>, null) { dialog, which, isChecked ->
+                    meds=response.body()!!
+                    val selectedList = ArrayList<Int>()
+                    var arrayMeds: MutableList<CharSequence> = mutableListOf()
+                    meds.forEach(){
+                        arrayMeds.add(it.name!!)
+                    }
+                    val builder = AlertDialog.Builder(context!!)
+                        .setTitle("Medicine List")
+                        .setMultiChoiceItems(arrayMeds.toTypedArray(), null) { dialog, which, isChecked ->
                             if (isChecked) {
                                 selectedList.add(which)
                             } else if (selectedList.contains(which)) {
                                 selectedList.remove(Integer.valueOf(which))
                             }
-                            builder.setPositiveButton("DONE") { dialogInterface, i ->
-                                var selectedStrings: java.util.ArrayList<String> = arrayListOf()
-
-                                for (j in selectedList.indices) {
-                                    selectedStrings.add(arrayMeds[selectedList[j]])
-
-                                }
-
-                                selectedList.forEach(){
-                                    Log.d("pedro",selectedStrings[it])
-
-                                }
-                            }
-                            builder.show()
                         }
+                        .setPositiveButton("DONE") { dialogInterface, i ->
+                            var selectedStrings: MutableList<String> = mutableListOf()
+
+                            for (j in selectedList.indices) {
+                                selectedStrings.add(arrayMeds[selectedList[j]].toString())
+                            }
+
+                            for (element in selectedStrings){
+                                Log.d("pedro", element)
+                            }
+                        }
+                         .show()
 
                 }
 
