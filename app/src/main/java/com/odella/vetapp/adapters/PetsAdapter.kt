@@ -39,7 +39,7 @@ class PetsAdapter(val context: Context, val onClick: (Pet) -> (Unit)) : Recycler
     }
 
     override fun getItemCount(): Int {
-        return pets.size
+        return differ.currentList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -54,11 +54,23 @@ class PetsAdapter(val context: Context, val onClick: (Pet) -> (Unit)) : Recycler
         holder.layout.setOnClickListener{
             onClick(pet)
         }
+        val image = when(pet.genus){
+            "Canine" -> {
+                context.getDrawable(R.drawable.image_dog)
+            }
+            "Feline" -> {
+                context.getDrawable(R.drawable.image_cat)
+            }
+            else -> {
+                null
+            }
+        }
+        holder.imgPet.setImageDrawable(image)
         //END LOGIC
     }
 
 
-    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
+    inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
         val layout: ConstraintLayout = itemView!!.findViewById(R.id.element_pet_layout)
         val imgPet: ImageView = itemView!!.findViewById(R.id.element_pet_img_genus)
         val txtName: TextView = itemView!!.findViewById(R.id.element_pet_txt_name)

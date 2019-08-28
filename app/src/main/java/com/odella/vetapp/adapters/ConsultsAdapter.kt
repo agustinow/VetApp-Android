@@ -99,7 +99,7 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
         }
     }
 
-    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
+    inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
         val layout: ConstraintLayout = itemView!!.findViewById(R.id.element_consult_layout)
         val imgPet: ImageView = itemView!!.findViewById(R.id.element_consult_img_animal)
         val txtNamePet: TextView = itemView!!.findViewById(R.id.element_consult_txt_pet_name)

@@ -4,5 +4,4 @@ import org.junit.Test
 
 class LoginActivityTest {
 
-
 }

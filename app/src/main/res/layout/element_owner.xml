@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/element_owner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+    <ImageButton
+            android:id="@+id/element_owner_btn_image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_login24dp" />
+
+    <TextView
+            android:id="@+id/element_owner_txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/element_owner_txt_username"
+            app:layout_constraintStart_toEndOf="@+id/element_owner_btn_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Heitor" />
+
+    <TextView
+            android:id="@+id/element_owner_txt_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/element_owner_txt_name"
+            app:layout_constraintTop_toBottomOf="@+id/element_owner_txt_name"
+            tools:text="scatman_87" />
+
+    <TextView
+            android:id="@+id/element_owner_txt_uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/design_default_color_on_secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#26" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

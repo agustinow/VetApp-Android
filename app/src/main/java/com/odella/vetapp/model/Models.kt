@@ -62,6 +62,9 @@ class Owner {
     @SerializedName("Address")
     @Expose
     var address: String? = null
+    @SerializedName("Photo")
+    @Expose
+    var image: String? = null
     @SerializedName("Username")
     @Expose
     var username: String? = null
