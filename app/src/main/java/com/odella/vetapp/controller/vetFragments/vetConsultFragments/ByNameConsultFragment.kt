@@ -24,7 +24,9 @@ import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Consult
 import com.odella.vetapp.model.Pet
 import com.odella.vetapp.service.NetworkService
+import kotlinx.android.synthetic.main.fragment_by_name_consult.*
 import kotlinx.android.synthetic.main.fragment_by_name_consult.view.*
+import kotlinx.android.synthetic.main.fragment_by_name_consult.view.btnNewConsult
 import kotlinx.android.synthetic.main.fragment_consult.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,6 +66,13 @@ class ByNameConsultFragment : Fragment() {
         view!!.btn_by_name_back.setOnClickListener {
             changeToPetList()
         }
+        btnNewConsult.setOnClickListener{
+            //click boton add consulta
+            var frag:Fragment=MakeConsultFragment.newInstance()
+            val ft = parentFragment!!.fragmentManager!!.beginTransaction()
+            ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
+            ft.commit()
+        }
     }
     fun loadData(){
         adapter = PetsAdapter(context!!) {
@@ -81,6 +90,11 @@ class ByNameConsultFragment : Fragment() {
     fun changeToConsultList(pet: Pet){
         conAdapter = ConsultsAdapter(context!!, SEE_NOTHING){
             //OPEN INFO
+            model.idConsult= it.id!!
+            var frag:Fragment=ViewConsultFragment.newInstance()
+            val ft = parentFragment!!.fragmentManager!!.beginTransaction()
+            ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
+            ft.commit()
         }
         val preFilteredConsults= model.consultByDateList!!.toList()
         var finalConsults = mutableListOf<Consult>()
