@@ -34,14 +34,13 @@ open class UserSingleton{
         var userID: String? = null
     }
 }
-fun writeEmail(recipient:String,subject:String,message:String): Intent{
+fun writeEmail(subject:String,message:String): Intent{
     val intent = Intent(Intent.ACTION_SENDTO)
     intent.data = Uri.parse("mailto:")
-    intent.putExtra(Intent.EXTRA_EMAIL,recipient)
+   // intent.putExtra(Intent.EXTRA_EMAIL,recipient)
     intent.putExtra(Intent.EXTRA_SUBJECT,subject)
     intent.putExtra(Intent.EXTRA_TEXT,message)
     return intent
 }
-
 
 fun formatDate(date: Date): String = SimpleDateFormat("MM/dd/yyyy", Locale.US).format(date)
