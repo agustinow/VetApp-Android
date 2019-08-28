@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 
 import com.odella.vetapp.R
 import com.odella.vetapp.constants.formatDate
+import com.odella.vetapp.constants.writeEmail
 import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Consult
 import com.odella.vetapp.model.Med
@@ -23,6 +25,7 @@ import java.util.ArrayList
 
 class ViewConsultFragment : Fragment() {
     lateinit var model: VetViewModel
+    lateinit var consult: Consult
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +52,7 @@ class ViewConsultFragment : Fragment() {
 
             override fun onResponse(call: Call<Consult>, response: Response<Consult>) {
                 if (response.isSuccessful) {
-                    val consult = response.body()
+                    consult = response.body()!!
                     txtDialogPetName.text = consult?.petName.toString()
                     txtDialogVetName.text = consult?.vetName.toString()
                     txtDialogOwnerName.text=consult?.ownerName.toString()
@@ -78,15 +81,27 @@ class ViewConsultFragment : Fragment() {
                     val adapterVacc = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, arrayVaccs.toArray())
                     spnMeds!!.adapter = adapterMeds
                     spnVaccs!!.adapter = adapterVacc
+
+
                 }
             }
 
         })
         btnPrintConsult.setOnClickListener{
-
+            Toast.makeText(context, "Impossible to connect", Toast.LENGTH_SHORT).show()
         }
         btnSendMail.setOnClickListener{
-
+            val fdate=formatDate(consult?.date!!)
+            val mailMessage="$fdate\n"+"\n" +
+                    "Pet Name:${consult.petName}\n" +
+                    "Vet Name:${consult.vetName}\n" +
+                    "Owner Name:${consult.ownerName}\n"+"\n" +
+                    "Description:${consult.message}\n" +
+                    "Vaccinations:${consult.meds}\n" +
+                    "Medicine:${consult.meds}"+"\n"+
+                    "@Powered by VetApp."
+            val mail=writeEmail("felipeoxandabarat@gmail.com","$fdate Consult: ${consult.petName} attended by ${consult.vetName}.",mailMessage)
+            startActivity(mail)
         }
     }
 
