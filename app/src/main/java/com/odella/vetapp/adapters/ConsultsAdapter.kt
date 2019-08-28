@@ -23,7 +23,7 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
     var filter: Filter = Filter()
     private var consults : List<Consult> = listOf()
 
-    val differ = AsyncListDiffer(this@ConsultsAdapter, object: DiffUtil.ItemCallback<Consult>(){
+    private val differ = AsyncListDiffer(this@ConsultsAdapter, object: DiffUtil.ItemCallback<Consult>(){
         override fun areItemsTheSame(oldItem: Consult, newItem: Consult): Boolean {
             return oldItem.id == newItem.id
         }
@@ -47,7 +47,7 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
         setFilter()
     }
 
-    fun setFilter(){
+    private fun setFilter(){
         var filtered =
             if(filter.name.isNullOrEmpty()){
                 //DO NOT FILTER
