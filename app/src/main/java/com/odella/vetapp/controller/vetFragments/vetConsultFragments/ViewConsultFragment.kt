@@ -52,6 +52,7 @@ class ViewConsultFragment : Fragment() {
                     val consult = response.body()
                     txtDialogPetName.text = consult?.petName.toString()
                     txtDialogVetName.text = consult?.vetName.toString()
+                    txtDialogOwnerName.text=consult?.ownerName.toString()
                     txtDialogDesc.text = consult?.message.toString()
                     txtDialogDate.text = formatDate(consult?.date!!)
 
@@ -65,7 +66,14 @@ class ViewConsultFragment : Fragment() {
                     consult?.vaccs!!.forEach {
                         arrayVaccs.add(it.name!!)
                     }
-
+                    if (arrayMeds.isNullOrEmpty()){
+                        spnMeds.visibility = View.GONE
+                        txtDialogPetMed.visibility = View.GONE
+                    }
+                    if (arrayVaccs.isNullOrEmpty()){
+                        spnVaccs.visibility = View.GONE
+                        txtDialogPetVacc.visibility = View.GONE
+                    }
                     val adapterMeds = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, arrayMeds.toArray())
                     val adapterVacc = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, arrayVaccs.toArray())
                     spnMeds!!.adapter = adapterMeds
