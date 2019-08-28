@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,9 +31,7 @@ import retrofit2.Response
 
 class ByDateConsultFragment : Fragment() {
     lateinit var adapter: ConsultsAdapter
-    lateinit var root: View
     lateinit var model: VetViewModel
-    lateinit var consultModel: VetConsultViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,27 +43,27 @@ class ByDateConsultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_by_date_consult, container, false)
+        return inflater.inflate(R.layout.fragment_by_date_consult, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         model = ViewModelProviders.of(activity!!)[VetViewModel::class.java]
-        //LOGIC
         model.consultByDateStatus.observe(viewLifecycleOwner, Observer<Int> {
             if(it == STATUS_FINISHED && !model.consultByDateList.isNullOrEmpty()){
                 loadData()
             } else {
-                root.txtNoData.visibility = View.VISIBLE
-                root.fragment_by_date_consult_recycler.visibility = View.INVISIBLE
-                root.fragment_by_date_consult_search.visibility = View.INVISIBLE
+                view.txtNoData.visibility = View.VISIBLE
+                view.fragment_by_date_consult_recycler.visibility = View.INVISIBLE
+                view.fragment_by_date_consult_search.visibility = View.INVISIBLE
             }
         })
-        //END LOGIC
-
-        return root
     }
 
     private fun loadData(){
         adapter = when(UserSingleton.userType!!){
             "vet" -> ConsultsAdapter(context!!, SEE_ONLY_PET) {
-                consultModel.idConsult= it.id!!
+                model.idConsult= it.id!!
                 //llamar fragmento ViewConsultFragment
                 var frag:Fragment=ViewConsultFragment.newInstance()
                 val ft = parentFragment!!.fragmentManager!!.beginTransaction()
@@ -76,13 +75,25 @@ class ByDateConsultFragment : Fragment() {
             }
         }
         model.consultByDateList
-        adapter.consults = model.consultByDateList!!.toList()
-        adapter.setDifferList()
-        root.txtNoData.visibility = View.GONE
-        root.fragment_by_date_consult_recycler.visibility = View.VISIBLE
-        root.fragment_by_date_consult_recycler.adapter = adapter
-        root.fragment_by_date_consult_recycler.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
-        root.fragment_by_date_consult_search.visibility = View.VISIBLE
+        adapter.setItems(model.consultByDateList!!.toList())
+
+
+        view!!.txtNoData.visibility = View.GONE
+        view!!.fragment_by_date_consult_recycler.visibility = View.VISIBLE
+        view!!.fragment_by_date_consult_recycler.adapter = adapter
+        view!!.fragment_by_date_consult_recycler.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
+        view!!.fragment_by_date_consult_search.visibility = View.VISIBLE
+        view!!.fragment_by_date_consult_search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filterByName(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filterByName(newText)
+                return false
+            }
+        })
     }
 
     companion object {

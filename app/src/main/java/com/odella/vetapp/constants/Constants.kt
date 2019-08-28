@@ -5,6 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat.startActivity
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 const val BASE_URL = "https://localhost:5001/api/"
 const val PREFS_NAME = "VetAppPrefs"
 const val PREFS_USERNAME = "username"
@@ -39,3 +42,6 @@ fun writeEmail(recipient:String,subject:String,message:String): Intent{
     intent.putExtra(Intent.EXTRA_TEXT,message)
     return intent
 }
+
+
+fun formatDate(date: Date): String = SimpleDateFormat("MM/dd/yyyy", Locale.US).format(date)

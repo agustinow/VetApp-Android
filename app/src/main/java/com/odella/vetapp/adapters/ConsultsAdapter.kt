@@ -14,13 +14,14 @@ import com.odella.vetapp.R
 import com.odella.vetapp.constants.SEE_ALL_NAMES
 import com.odella.vetapp.constants.SEE_ONLY_PET
 import com.odella.vetapp.constants.SEE_ONLY_VET
+import com.odella.vetapp.constants.formatDate
 import com.odella.vetapp.model.Consult
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult) -> (Unit)) : RecyclerView.Adapter<ConsultsAdapter.ViewHolder>() {
-
-    var consults : List<Consult> = listOf()
+    var filter: Filter = Filter()
+    private var consults : List<Consult> = listOf()
 
     val differ = AsyncListDiffer(this@ConsultsAdapter, object: DiffUtil.ItemCallback<Consult>(){
         override fun areItemsTheSame(oldItem: Consult, newItem: Consult): Boolean {
@@ -41,11 +42,31 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
         return differ.currentList.size
     }
 
-    fun setDifferList(){
-        //TEMPORARY, HAVE TO MAKE THE FILTER
-        this.differ.submitList(consults)
+    fun setItems(consults: List<Consult>){
+        this.consults = consults
+        setFilter()
     }
 
+    fun setFilter(){
+        var filtered =
+            if(filter.name.isNullOrEmpty()){
+                //DO NOT FILTER
+                consults
+            } else {
+                consults.filter {
+                    it.vetName?.toLowerCase()?.contains(filter.name!!.toLowerCase()) ?: true || it.petName?.toLowerCase()?.contains(filter.name!!.toLowerCase()) ?: true
+                }
+            }
+
+        differ.submitList(filtered)
+    }
+
+    fun filterByName(str: String?){
+        filter.name = str
+        setFilter()
+    }
+
+    data class Filter(var name: String? = "")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val consult = differ.currentList[holder.adapterPosition]
         holder.txtNamePet.text = consult.petName
@@ -58,7 +79,7 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
             SEE_ONLY_PET -> holder.txtNamePet.visibility = View.VISIBLE
             SEE_ONLY_VET -> holder.txtNameVet.visibility = View.VISIBLE
             else -> {
-                holder.txtNamePet.text = SimpleDateFormat("MM/dd/yyyy").format(consult.date!!)
+                holder.txtNamePet.text = formatDate(consult.date!!)
                 holder.txtNamePet.visibility = View.VISIBLE
                 holder.txtDate.visibility = View.GONE
                 val density = context.resources.displayMetrics.density;
@@ -72,7 +93,7 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
         else View.VISIBLE
         holder.imgVacc.visibility = if(consult.vaccs!!.isEmpty()) View.INVISIBLE
         else View.VISIBLE
-        holder.txtDate.text = SimpleDateFormat("MM/dd/yyyy").format(consult.date!!)
+        holder.txtDate.text = formatDate(consult.date!!)
         holder.layout.setOnClickListener{
             onClick(consult)
         }
