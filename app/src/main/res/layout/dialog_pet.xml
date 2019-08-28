@@ -52,8 +52,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toTopOf="@+id/textView9" />
+            app:layout_constraintStart_toEndOf="@+id/txtDialogPetVacc"
+            app:layout_constraintTop_toTopOf="@+id/txtDialogPetVacc" />
 
     <Spinner
             android:id="@+id/spnMeds"
@@ -62,10 +62,10 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/spnVaccs"
-            app:layout_constraintTop_toTopOf="@+id/textView7" />
+            app:layout_constraintTop_toTopOf="@+id/txtDialogPetMed" />
 
     <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txtDialogPetMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -100,13 +100,13 @@
             tools:text="Katy" />
 
     <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/txtDialogPetVacc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="@+id/txtDialogPetMed"
             app:layout_constraintTop_toBottomOf="@+id/spnMeds"
             tools:text="Vaccs" />
 
