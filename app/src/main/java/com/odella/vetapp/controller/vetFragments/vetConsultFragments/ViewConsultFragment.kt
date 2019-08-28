@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.lifecycle.ViewModelProviders
 
 import com.odella.vetapp.R
+import com.odella.vetapp.constants.formatDate
 import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Consult
 import com.odella.vetapp.model.Med
@@ -21,6 +23,7 @@ import java.util.ArrayList
 
 class ViewConsultFragment : Fragment() {
     lateinit var model: VetViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,6 +39,8 @@ class ViewConsultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model = ViewModelProviders.of(activity!!)[VetViewModel::class.java]
+
         val call = NetworkService.create().getConsult(model.idConsult)
         call.enqueue(object : retrofit2.Callback<Consult> {
             override fun onFailure(call: Call<Consult>, t: Throwable) {
@@ -48,17 +53,17 @@ class ViewConsultFragment : Fragment() {
                     txtDialogPetName.text = consult?.petName.toString()
                     txtDialogVetName.text = consult?.vetName.toString()
                     txtDialogDesc.text = consult?.message.toString()
-                    txtDialogDate.text = consult?.date.toString()
+                    txtDialogDate.text = formatDate(consult?.date!!)
 
 
-                    var arrayMeds: ArrayList<Med> = arrayListOf()
-                    var arrayVaccs: ArrayList<Vacc> = arrayListOf()
+                    var arrayMeds: ArrayList<String> = arrayListOf()
+                    var arrayVaccs: ArrayList<String> = arrayListOf()
 
                     consult?.meds!!.forEach {
-                        arrayMeds.add(it)
+                        arrayMeds.add(it.name!!)
                     }
                     consult?.vaccs!!.forEach {
-                        arrayVaccs.add(it)
+                        arrayVaccs.add(it.name!!)
                     }
 
                     val adapterMeds = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, arrayMeds.toArray())

@@ -202,17 +202,39 @@ class Consult {
     var message: String? = null
     @SerializedName("Meds")
     @Expose
-    var meds: List<Med>? = null
+    var meds: List<ConsultMed>? = null
     @SerializedName("Vaccs")
     @Expose
-    var vaccs: List<Vacc>? = null
+    var vaccs: List<ConsultVacc>? = null
     @SerializedName("VetName")
     @Expose
     var vetName: String? = null
     @SerializedName("PetName")
     @Expose
     var petName: String? = null
+    @SerializedName("OwnerName")
+    @Expose
+    var ownerName: String? = null
 }
+
+class ConsultVacc {
+    @SerializedName("ID")
+    @Expose
+    var id: String? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+}
+
+class ConsultMed {
+    @SerializedName("ID")
+    @Expose
+    var id: String? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
+}
+
 class TokenResponse {
     @SerializedName("type")
     @Expose

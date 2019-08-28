@@ -14,6 +14,7 @@ import com.odella.vetapp.R
 import com.odella.vetapp.constants.SEE_ALL_NAMES
 import com.odella.vetapp.constants.SEE_ONLY_PET
 import com.odella.vetapp.constants.SEE_ONLY_VET
+import com.odella.vetapp.constants.formatDate
 import com.odella.vetapp.model.Consult
 import java.text.SimpleDateFormat
 import java.util.*
@@ -78,7 +79,7 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
             SEE_ONLY_PET -> holder.txtNamePet.visibility = View.VISIBLE
             SEE_ONLY_VET -> holder.txtNameVet.visibility = View.VISIBLE
             else -> {
-                holder.txtNamePet.text = SimpleDateFormat("MM/dd/yyyy").format(consult.date!!)
+                holder.txtNamePet.text = formatDate(consult.date!!)
                 holder.txtNamePet.visibility = View.VISIBLE
                 holder.txtDate.visibility = View.GONE
                 val density = context.resources.displayMetrics.density;
@@ -92,7 +93,7 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
         else View.VISIBLE
         holder.imgVacc.visibility = if(consult.vaccs!!.isEmpty()) View.INVISIBLE
         else View.VISIBLE
-        holder.txtDate.text = SimpleDateFormat("MM/dd/yyyy").format(consult.date!!)
+        holder.txtDate.text = formatDate(consult.date!!)
         holder.layout.setOnClickListener{
             onClick(consult)
         }

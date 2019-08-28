@@ -1,5 +1,8 @@
 package com.odella.vetapp.constants
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 const val BASE_URL = "https://localhost:5001/api/"
 const val PREFS_NAME = "VetAppPrefs"
 const val PREFS_USERNAME = "username"
@@ -26,3 +29,5 @@ open class UserSingleton{
         var userID: String? = null
     }
 }
+
+fun formatDate(date: Date): String = SimpleDateFormat("MM/dd/yyyy", Locale.US).format(date)
