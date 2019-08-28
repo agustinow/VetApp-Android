@@ -68,6 +68,12 @@ class ViewConsultFragment : Fragment() {
             }
 
         })
+        btnPrintConsult.setOnClickListener{
+
+        }
+        btnSendMail.setOnClickListener{
+
+        }
     }
 
     companion object {

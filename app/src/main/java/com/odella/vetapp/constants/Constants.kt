@@ -1,5 +1,10 @@
 package com.odella.vetapp.constants
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat.startActivity
+
 const val BASE_URL = "https://localhost:5001/api/"
 const val PREFS_NAME = "VetAppPrefs"
 const val PREFS_USERNAME = "username"
@@ -25,4 +30,12 @@ open class UserSingleton{
         var userType: String? = null
         var userID: String? = null
     }
+}
+fun writeEmail(recipient:String,subject:String,message:String): Intent{
+    val intent = Intent(Intent.ACTION_SENDTO)
+    intent.data = Uri.parse("mailto:")
+    intent.putExtra(Intent.EXTRA_EMAIL,recipient)
+    intent.putExtra(Intent.EXTRA_SUBJECT,subject)
+    intent.putExtra(Intent.EXTRA_TEXT,message)
+    return intent
 }
