@@ -70,7 +70,7 @@ class ByNameConsultFragment : Fragment() {
             //click boton add consulta
             var frag:Fragment=MakeConsultFragment.newInstance()
             val ft = parentFragment!!.fragmentManager!!.beginTransaction()
-            ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
+            ft.add(R.id.activiy_vet_content, frag, "MakeConsultFragment")
             ft.commit()
         }
     }

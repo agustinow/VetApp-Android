@@ -9,10 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 
 import com.odella.vetapp.R
 import com.odella.vetapp.constants.UserSingleton
+import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Med
 import com.odella.vetapp.model.Vacc
 import com.odella.vetapp.service.NetworkService
@@ -23,10 +27,17 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MakeConsultFragment : Fragment() {
+class MakeConsultFragment : Fragment()//, OnBackPressedCallback(true)
+{
+    /*
+    override fun handleOnBackPressed() {
+        remove()
+    }
+    */
 
     lateinit var meds:List<Med>
     lateinit var vaccs:List<Vacc>
+    lateinit var model:VetViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,9 +51,10 @@ class MakeConsultFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_make_consult, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        model=ViewModelProviders.of(activity!!)[VetViewModel::class.java]
 
         btnAddMeds.setOnClickListener {
             val call = NetworkService.create().getMeds(UserSingleton.actualToken)

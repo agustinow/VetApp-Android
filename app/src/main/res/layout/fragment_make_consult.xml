@@ -86,8 +86,9 @@
             android:background="@drawable/btn_rounded"
             android:text="Post New Consult"
             android:textColor="@color/colorBackground"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddMeds"
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddMeds" />
 
     <EditText
             android:id="@+id/editText3"

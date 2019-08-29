@@ -13,4 +13,5 @@ class VetViewModel : ViewModel() {
     var consultByNameList: MutableList<Pet>? = null
     var ownersList: List<Owner>? = null
     var idConsult: String = ""
+    var consultPetId: String? = null
 }
