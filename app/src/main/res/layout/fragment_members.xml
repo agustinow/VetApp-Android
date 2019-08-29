@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         tools:context=".controller.vetFragments.MembersFragment" >
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
             android:id="@+id/fragment_members_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
