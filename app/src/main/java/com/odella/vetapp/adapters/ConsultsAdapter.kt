@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +20,7 @@ import com.odella.vetapp.model.Consult
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult) -> (Unit)) : RecyclerView.Adapter<ConsultsAdapter.ViewHolder>() {
+class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult) -> (Unit), val onDeleteClick: (Consult) -> (Unit)) : RecyclerView.Adapter<ConsultsAdapter.ViewHolder>() {
     var filter: Filter = Filter()
     private var consults : List<Consult> = listOf()
 
@@ -97,6 +98,9 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
         holder.layout.setOnClickListener{
             onClick(consult)
         }
+        holder.delete.setOnClickListener{
+            onDeleteClick(consult)
+        }
     }
 
     inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
@@ -107,6 +111,7 @@ class ConsultsAdapter(val context: Context, val mode: Int, val onClick: (Consult
         val txtDate: TextView = itemView!!.findViewById(R.id.element_consult_txt_date)
         val imgVacc: ImageView = itemView!!.findViewById(R.id.element_consult_img_vaccine)
         val imgPill: ImageView = itemView!!.findViewById(R.id.element_consult_img_pill)
+        val delete: ImageButton = itemView!!.findViewById(R.id.element_consult_btn_remove)
     }
 
 }

@@ -102,14 +102,16 @@ class ByNameConsultFragment : Fragment() {
 
     fun changeToConsultList(pet: Pet){
         model.consultPetId = pet.id
-        conAdapter = ConsultsAdapter(context!!, SEE_NOTHING){
+        conAdapter = ConsultsAdapter(context!!, SEE_NOTHING,{
             //OPEN INFO
             model.idConsult= it.id!!
             var frag:Fragment=ViewConsultFragment.newInstance()
             val ft = parentFragment!!.fragmentManager!!.beginTransaction()
             ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
             ft.commit()
-        }
+        },{
+
+        })
         val preFilteredConsults= model.consultByDateList!!.toList()
         var finalConsults = mutableListOf<Consult>()
         for (consult in preFilteredConsults){
