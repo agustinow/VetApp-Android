@@ -18,10 +18,14 @@ import com.odella.vetapp.R
 import com.odella.vetapp.constants.UserSingleton
 import com.odella.vetapp.controller.vetFragments.VetViewModel
 import com.odella.vetapp.model.Med
+import com.odella.vetapp.model.Pet
 import com.odella.vetapp.model.Vacc
+import com.odella.vetapp.model.Vet
 import com.odella.vetapp.service.NetworkService
 import kotlinx.android.synthetic.main.fragment_make_consult.*
+import kotlinx.android.synthetic.main.fragment_make_consult.view.*
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
@@ -55,6 +59,35 @@ class MakeConsultFragment : Fragment()//, OnBackPressedCallback(true)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model=ViewModelProviders.of(activity!!)[VetViewModel::class.java]
+
+        NetworkService.create().getPet(model.consultPetId!!).enqueue(object: Callback<Pet>{
+            override fun onFailure(call: Call<Pet>, t: Throwable) {
+                //PIJA
+            }
+
+            override fun onResponse(call: Call<Pet>, response: Response<Pet>) {
+                if (response.isSuccessful){
+                    val pet = response.body()
+                    view.txt_petname.text = pet?.name ?: ""
+                    view.txt_ownername.text = pet?.ownerName ?: ""
+                }
+            }
+
+        })
+
+        NetworkService.create().getVet(UserSingleton.userID!!).enqueue(object: Callback<Vet>{
+            override fun onFailure(call: Call<Vet>, t: Throwable) {
+                //PIJA
+            }
+
+            override fun onResponse(call: Call<Vet>, response: Response<Vet>) {
+                if(response.isSuccessful){
+                    val vet = response.body()
+                    view.txt_vetname.text = vet?.name ?: ""
+                }
+            }
+        })
+
 
         btnAddMeds.setOnClickListener {
             val call = NetworkService.create().getMeds(UserSingleton.actualToken)

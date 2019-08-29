@@ -4,9 +4,11 @@ import  androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.odella.vetapp.R
+import com.odella.vetapp.constants.IOnBackPressed
 import com.odella.vetapp.constants.STATUS_UNFINISHED
 import com.odella.vetapp.controller.vetFragments.*
 import com.odella.vetapp.controller.vetFragments.ConsultFragment
@@ -16,6 +18,7 @@ import com.odella.vetapp.controller.vetFragments.VetFragmentManager
 
 class VetActivity : AppCompatActivity() {
     lateinit var sectionsPagerAdapter: VetFragmentManager
+    lateinit var onBackClickListener: IOnBackPressed
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,16 +50,15 @@ class VetActivity : AppCompatActivity() {
         //mSelectedItem = item.itemId
         //updateToolbar(item.title)
         if (frag != null) {
-            val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
-            ft.commit()
+            changeFragment(frag)
         }
     }
 
     fun changeFragment(frag:Fragment){
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
-        ft.commit()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
     }
 
 }

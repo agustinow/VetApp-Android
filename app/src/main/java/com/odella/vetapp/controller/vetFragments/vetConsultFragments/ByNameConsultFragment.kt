@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -68,10 +70,19 @@ class ByNameConsultFragment : Fragment() {
         }
         btnNewConsult.setOnClickListener{
             //click boton add consulta
+
             var frag:Fragment=MakeConsultFragment.newInstance()
+            /*
             val ft = parentFragment!!.fragmentManager!!.beginTransaction()
             ft.add(R.id.activiy_vet_content, frag, "MakeConsultFragment")
             ft.commit()
+             */
+
+            activity!!.supportFragmentManager.beginTransaction()
+                .replace(R.id.activiy_vet_content, frag, "MakeConsultFragment")
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .addToBackStack(null)
+                .commit()
         }
     }
     fun loadData(){
@@ -80,14 +91,17 @@ class ByNameConsultFragment : Fragment() {
         }
         adapter.pets = model.consultByNameList!!.toList()
         adapter.setDifferList()
+        val decor =  DividerItemDecoration(context!!, LinearLayoutManager.VERTICAL)
         view!!.txtNoData.visibility = View.GONE
         view!!.fragment_by_name_consult_recycler.visibility = View.VISIBLE
         view!!.fragment_by_name_consult_recycler.adapter = adapter
         view!!.fragment_by_name_consult_recycler.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
+        view!!.fragment_by_name_consult_recycler.addItemDecoration(decor)
         view!!.fragment_by_name_consult_search.visibility = View.VISIBLE
     }
 
     fun changeToConsultList(pet: Pet){
+        model.consultPetId = pet.id
         conAdapter = ConsultsAdapter(context!!, SEE_NOTHING){
             //OPEN INFO
             model.idConsult= it.id!!

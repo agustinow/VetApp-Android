@@ -54,8 +54,7 @@ class MembersFragment : Fragment() {
                     override fun onFailure(call: Call<List<Owner>>, t: Throwable) {
                         view.isClickable = true
                         view.progressBar.visibility = View.GONE
-                        Toast.makeText(context!!, "Could not load data. Sorry", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(context!!, "Could not load data. Sorry", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onResponse(
@@ -100,12 +99,12 @@ class MembersFragment : Fragment() {
             }
             adapter.setItems(model.ownersList!!)
             view!!.fragment_members_recycler.adapter = adapter
-            var lm = LinearLayoutManager(
+            val lm = LinearLayoutManager(
                 context!!,
                 LinearLayoutManager.VERTICAL,
                 false
             )
-            var decor = DividerItemDecoration(context!!, lm.orientation)
+            val decor = DividerItemDecoration(context!!, lm.orientation)
             view!!.fragment_members_recycler.layoutManager = LinearLayoutManager(
                 context!!,
                 LinearLayoutManager.VERTICAL,

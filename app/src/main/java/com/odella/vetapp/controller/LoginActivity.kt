@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.odella.vetapp.R
 import com.odella.vetapp.constants.*
 import com.odella.vetapp.model.TokenResponse
+import com.odella.vetapp.model.Vet
 import com.odella.vetapp.service.NetworkService
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.MediaType
@@ -189,6 +190,7 @@ class LoginActivity : AppCompatActivity() {
 
     @ExperimentalStdlibApi
     fun login(){
+
         if(chkRememberMe.isChecked) {
             if(txtUsername.text.isEmpty()) encryptAndSave(preUsername)
             else encryptAndSave(txtUsername.text.toString())

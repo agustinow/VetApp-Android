@@ -12,27 +12,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:text="Owner Name:"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/txt"
-            app:layout_constraintTop_toBottomOf="@+id/txt"
-            tools:text="Owner Name:" />
+            app:layout_constraintTop_toBottomOf="@+id/txt" />
 
     <TextView
-            android:id="@+id/txtDialogDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="06/31/2019" />
-
-    <TextView
-            android:id="@+id/txtDialogOwnerName"
+            android:id="@+id/txt_ownername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -44,7 +31,7 @@
             tools:text="Felipe Oxandabarat" />
 
     <TextView
-            android:id="@+id/txtDialogPetName"
+            android:id="@+id/txt_petname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -60,14 +47,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:text="Pet Name:"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/txtDialogVetName"
-            app:layout_constraintTop_toBottomOf="@+id/txtDialogVetName"
-            tools:text="Pet Name:" />
+            app:layout_constraintStart_toStartOf="@+id/txt_vetname"
+            app:layout_constraintTop_toBottomOf="@+id/txt_vetname" />
 
     <TextView
-            android:id="@+id/txtDialogVetName"
+            android:id="@+id/txt_vetname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

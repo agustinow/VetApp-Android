@@ -55,6 +55,9 @@ interface NetworkService {
     @GET("pets/{id}")
     fun getPet(@Path("id") path: String): Call<Pet>
 
+    @GET("vets/{id}")
+    fun getVet(@Path("id") path: String): Call<Vet>
+
     @GET("vets")
     fun getVets(@Header("Authorization") token: String): Call<List<Vet>>
 

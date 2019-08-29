@@ -51,9 +51,9 @@ class ViewConsultFragment : Fragment() {
             override fun onResponse(call: Call<Consult>, response: Response<Consult>) {
                 if (response.isSuccessful) {
                     consult = response.body()!!
-                    txtDialogPetName.text = consult?.petName.toString()
-                    txtDialogVetName.text = consult?.vetName.toString()
-                    txtDialogOwnerName.text=consult?.ownerName.toString()
+                    txt_petname.text = consult?.petName.toString()
+                    txt_vetname.text = consult?.vetName.toString()
+                    txt_ownername.text=consult?.ownerName.toString()
                     txtDialogDesc.text = consult?.message.toString()
                     txtDialogDate.text = formatDate(consult?.date!!)
 

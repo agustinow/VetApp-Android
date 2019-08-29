@@ -76,7 +76,7 @@
             tools:text="Meds" />
 
     <TextView
-            android:id="@+id/txtDialogOwnerName"
+            android:id="@+id/txt_ownername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -88,7 +88,7 @@
             tools:text="Felipe Oxandabarat" />
 
     <TextView
-            android:id="@+id/txtDialogPetName"
+            android:id="@+id/txt_petname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -117,12 +117,12 @@
             android:layout_marginTop="28dp"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/txtDialogVetName"
-            app:layout_constraintTop_toBottomOf="@+id/txtDialogVetName"
+            app:layout_constraintStart_toStartOf="@+id/txt_vetname"
+            app:layout_constraintTop_toBottomOf="@+id/txt_vetname"
             tools:text="Pet Name:" />
 
     <TextView
-            android:id="@+id/txtDialogVetName"
+            android:id="@+id/txt_vetname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
