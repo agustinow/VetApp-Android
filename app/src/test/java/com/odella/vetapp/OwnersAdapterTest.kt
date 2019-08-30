@@ -12,12 +12,10 @@ import org.robolectric.annotation.Config
 @Config(sdk = [23])
 
 class OwnersAdapterTest {
-    lateinit var adapter: UsersAdapter
+    lateinit var subject: UsersAdapter
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
     }
-
-
 }

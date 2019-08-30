@@ -8,14 +8,14 @@
 
 
     <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txtview_ownername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/txt"
-            app:layout_constraintTop_toBottomOf="@+id/txt"
+            app:layout_constraintStart_toStartOf="@+id/txtview_petname"
+            app:layout_constraintTop_toBottomOf="@+id/txtview_petname"
             tools:text="Owner Name:" />
 
     <TextView
@@ -82,9 +82,9 @@
             android:layout_marginStart="8dp"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4"
+            app:layout_constraintBottom_toBottomOf="@+id/txtview_ownername"
+            app:layout_constraintStart_toEndOf="@+id/txtview_ownername"
+            app:layout_constraintTop_toTopOf="@+id/txtview_ownername"
             tools:text="Felipe Oxandabarat" />
 
     <TextView
@@ -94,9 +94,9 @@
             android:layout_marginStart="8dp"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/txt"
-            app:layout_constraintStart_toEndOf="@+id/txt"
-            app:layout_constraintTop_toTopOf="@+id/txt"
+            app:layout_constraintBottom_toBottomOf="@+id/txtview_petname"
+            app:layout_constraintStart_toEndOf="@+id/txtview_petname"
+            app:layout_constraintTop_toTopOf="@+id/txtview_petname"
             tools:text="Katy" />
 
     <TextView
@@ -111,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/spnMeds" />
 
     <TextView
-            android:id="@+id/txt"
+            android:id="@+id/txtview_petname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -167,8 +167,8 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="@+id/txtview_ownername"
+            app:layout_constraintTop_toBottomOf="@+id/txtview_ownername"
             tools:text="Description: " />
 
     <androidx.constraintlayout.widget.Guideline

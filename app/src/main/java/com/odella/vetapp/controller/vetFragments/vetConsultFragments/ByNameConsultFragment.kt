@@ -69,14 +69,7 @@ class ByNameConsultFragment : Fragment() {
             changeToPetList()
         }
         btnNewConsult.setOnClickListener{
-            //click boton add consulta
-
             var frag:Fragment=MakeConsultFragment.newInstance()
-            /*
-            val ft = parentFragment!!.fragmentManager!!.beginTransaction()
-            ft.add(R.id.activiy_vet_content, frag, "MakeConsultFragment")
-            ft.commit()
-             */
 
             activity!!.supportFragmentManager.beginTransaction()
                 .replace(R.id.activiy_vet_content, frag, "MakeConsultFragment")
@@ -105,9 +98,9 @@ class ByNameConsultFragment : Fragment() {
         conAdapter = ConsultsAdapter(context!!, SEE_NOTHING){
             //OPEN INFO
             model.idConsult= it.id!!
-            var frag:Fragment=ViewConsultFragment.newInstance()
+            var frag: Fragment = ViewConsultFragment.newInstance()
             val ft = parentFragment!!.fragmentManager!!.beginTransaction()
-            ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
+            ft.replace(R.id.activiy_vet_content, frag, frag.tag)
             ft.commit()
         }
         val preFilteredConsults= model.consultByDateList!!.toList()

@@ -20,15 +20,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        networkService = NetworkService.create()
-        GlobalScope.launch{
-            delay(1000L)
+        //GlobalScope.launch{
+            //delay(1000L)
             checkConnection()
-        }
+        //}
     }
 
     fun checkConnection(){
-        networkService.checkConnection().enqueue(object: Callback<Void> {
+        NetworkService.create().checkConnection().enqueue(object: Callback<Void> {
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 MaterialDialog(this@MainActivity).show{
                     title(R.string.network_error)
