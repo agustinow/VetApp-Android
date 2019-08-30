@@ -17,7 +17,12 @@ import com.odella.vetapp.constants.SEE_ONLY_PET
 import com.odella.vetapp.constants.STATUS_FINISHED
 import com.odella.vetapp.constants.UserSingleton
 import com.odella.vetapp.controller.vetFragments.VetViewModel
+import com.odella.vetapp.service.NetworkService
+import kotlinx.android.synthetic.main.element_consult.*
 import kotlinx.android.synthetic.main.fragment_by_date_consult.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ByDateConsultFragment : Fragment() {
     lateinit var adapter: ConsultsAdapter
@@ -47,21 +52,42 @@ class ByDateConsultFragment : Fragment() {
                 view.fragment_by_date_consult_recycler.visibility = View.INVISIBLE
                 view.fragment_by_date_consult_search.visibility = View.INVISIBLE
             }
+
+
         })
     }
 
     private fun loadData(){
         adapter = when(UserSingleton.userType!!){
-            "vet" -> ConsultsAdapter(context!!, SEE_ONLY_PET) {
+            "vet" -> ConsultsAdapter(context!!, SEE_ONLY_PET, {
                 model.idConsult= it.id!!
                 var frag:Fragment=ViewConsultFragment.newInstance()
                 val ft = parentFragment!!.fragmentManager!!.beginTransaction()
                 ft.replace(R.id.activiy_vet_content, frag, frag!!.tag)
                 ft.commit()
-            }
-            else -> ConsultsAdapter(context!!, SEE_ALL_NAMES) {
+            }, {
+                //DIALOG DE CONFIRMACION
 
-            }
+                NetworkService.create().deleteConsult(it.id!!).enqueue(object: Callback<Any>{
+                    override fun onFailure(call: Call<Any>, t: Throwable) {
+                        //FAIL
+                    }
+
+                    override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                        if(response.isSuccessful){
+                            loadData()
+                        } else {
+                            //FAIL
+                        }
+                    }
+
+                })
+            })
+            else -> ConsultsAdapter(context!!, SEE_ALL_NAMES, {
+
+            },{
+
+            })
         }
         model.consultByDateList
         adapter.setItems(model.consultByDateList!!.toList())

@@ -71,6 +71,10 @@ interface NetworkService {
     fun getOwners(@Header("Authorization") token: String): Call<List<Owner>>
 
 
+    //DELETES
+    @DELETE("consults/{id}")
+    fun deleteConsult(@Path("id") path: String): Call<Any>
+
     //POSTS
 
 
