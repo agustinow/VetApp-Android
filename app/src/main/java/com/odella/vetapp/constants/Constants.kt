@@ -23,6 +23,7 @@ const val SEE_ONLY_PET = 1
 const val SEE_ONLY_VET = 2
 const val SEE_NOTHING = 3
 const val CONSULT_ID="consultid"
+const val MEMBER_ID="memberid"
 
 //THIS IS AN EASTER EGG HUEHUEHUE
 const val STATUS_UNFINISHED = 0

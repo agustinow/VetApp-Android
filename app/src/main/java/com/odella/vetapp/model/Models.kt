@@ -16,7 +16,7 @@ class Pet {
     var name: String? = null
     @SerializedName("Age")
     @Expose
-    var age: String? = null
+    var age: Date? = null
     @SerializedName("Genus")
     @Expose
     var genus: String? = null
@@ -49,7 +49,7 @@ class Owner {
     var name: String? = null
     @SerializedName("Member_Start")
     @Expose
-    var memberStart: String? = null
+    var memberStart: Date? = null
     @SerializedName("Cell_Phone")
     @Expose
     var cellPhone: String? = null

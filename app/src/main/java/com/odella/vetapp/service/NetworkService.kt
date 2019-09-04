@@ -69,7 +69,8 @@ interface NetworkService {
 
     @GET("owners")
     fun getOwners(@Header("Authorization") token: String): Call<List<Owner>>
-
+    @GET("owner/{id}")
+    fun getOwner(@Path("id") path: String): Call<Owner>
 
     //DELETES
     @DELETE("consults/{id}")
