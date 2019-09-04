@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.odella.vetapp.R
 import com.odella.vetapp.adapters.UsersAdapter
+import com.odella.vetapp.components.DaggerInfoComponent
 import com.odella.vetapp.constants.UserSingleton
 import com.odella.vetapp.model.Owner
 import com.odella.vetapp.service.NetworkService
@@ -49,7 +50,7 @@ class MembersFragment : Fragment() {
 
         if(model.ownersList.isNullOrEmpty()) {
             view.isClickable = false
-            NetworkService.create().getOwners(UserSingleton.actualToken)
+            NetworkService.create().getOwners(model.userSingleton.actualToken!!)
                 .enqueue(object : Callback<List<Owner>> {
                     override fun onFailure(call: Call<List<Owner>>, t: Throwable) {
                         view.isClickable = true

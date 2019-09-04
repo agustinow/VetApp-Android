@@ -7,14 +7,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.odella.vetapp.App
 import com.odella.vetapp.R
+import com.odella.vetapp.components.DaggerInfoComponent
 import com.odella.vetapp.constants.IOnBackPressed
 import com.odella.vetapp.constants.STATUS_UNFINISHED
+import com.odella.vetapp.constants.UserSingleton
 import com.odella.vetapp.controller.vetFragments.*
 import com.odella.vetapp.controller.vetFragments.ConsultFragment
 import com.odella.vetapp.controller.vetFragments.MembersFragment
 import com.odella.vetapp.controller.vetFragments.PetsFragment
 import com.odella.vetapp.controller.vetFragments.VetFragmentManager
+import javax.inject.Inject
 
 class VetActivity : AppCompatActivity() {
     lateinit var sectionsPagerAdapter: VetFragmentManager
@@ -25,6 +29,7 @@ class VetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_vet)
         val navView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         val model: VetViewModel = ViewModelProviders.of(this@VetActivity)[VetViewModel::class.java]
+
         model.consultByDateStatus.value = STATUS_UNFINISHED
         model.consultByNameStatus.value = STATUS_UNFINISHED
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)

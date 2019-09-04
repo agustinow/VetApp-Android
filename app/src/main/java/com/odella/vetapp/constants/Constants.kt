@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat.startActivity
 
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
 const val BASE_URL = "https://localhost:5001/api/"
 const val PREFS_NAME = "VetAppPrefs"
@@ -27,13 +29,13 @@ const val STATUS_UNFINISHED = 0
 const val STATUS_ERROR = 2
 const val STATUS_FINISHED = 1
 
-open class UserSingleton{
-    companion object  {
-        var actualToken: String = ""
-        var userType: String? = null
-        var userID: String? = null
-    }
+@Singleton
+open class UserSingleton @Inject constructor(){
+    var actualToken: String? = ""
+    open var userType: String? = ""
+    open var userID: String? = ""
 }
+
 fun writeEmail(subject:String,message:String): Intent{
     val intent = Intent(Intent.ACTION_SENDTO)
     intent.data = Uri.parse("mailto:")

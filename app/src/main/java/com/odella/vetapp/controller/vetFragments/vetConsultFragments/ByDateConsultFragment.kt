@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.odella.vetapp.R
 import com.odella.vetapp.adapters.ConsultsAdapter
+import com.odella.vetapp.components.DaggerInfoComponent
 import com.odella.vetapp.constants.SEE_ALL_NAMES
 import com.odella.vetapp.constants.SEE_ONLY_PET
 import com.odella.vetapp.constants.STATUS_FINISHED
@@ -58,7 +59,7 @@ class ByDateConsultFragment : Fragment() {
     }
 
     private fun loadData(){
-        adapter = when(UserSingleton.userType!!){
+        adapter = when(model.userSingleton.userType!!){
             "vet" -> ConsultsAdapter(context!!, SEE_ONLY_PET, {
                 model.idConsult= it.id!!
                 var frag:Fragment=ViewConsultFragment.newInstance()

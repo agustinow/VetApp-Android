@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.odella.vetapp.R
+import com.odella.vetapp.components.DaggerInfoComponent
 import com.odella.vetapp.constants.STATUS_ERROR
 import com.odella.vetapp.constants.STATUS_FINISHED
 import com.odella.vetapp.constants.STATUS_UNFINISHED
@@ -54,7 +55,7 @@ class ConsultFragment : Fragment() {
         if(model.consultByNameStatus.value != STATUS_FINISHED || model.consultByDateStatus.value != STATUS_FINISHED) {
             view!!.consult_progress_bar.visibility = View.VISIBLE
             view.isClickable = false
-            NetworkService.create().getPetsAttendedByOID(UserSingleton.userID!!).enqueue(
+            NetworkService.create().getPetsAttendedByOID(model.userSingleton.userID!!).enqueue(
                 object :
                     Callback<List<Pet>> {
                     override fun onFailure(call: Call<List<Pet>>, t: Throwable) {
@@ -72,7 +73,7 @@ class ConsultFragment : Fragment() {
                         checkIfLoaded()
                     }
                 })
-            NetworkService.create().getAllConsultsOfOID(UserSingleton.userID!!).enqueue(
+            NetworkService.create().getAllConsultsOfOID(model.userSingleton.userID!!).enqueue(
                 object :
                     Callback<List<Consult>> {
                     override fun onFailure(call: Call<List<Consult>>, t: Throwable) {

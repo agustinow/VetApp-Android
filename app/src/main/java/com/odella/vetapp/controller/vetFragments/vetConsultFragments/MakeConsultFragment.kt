@@ -75,7 +75,7 @@ class MakeConsultFragment : Fragment()//, OnBackPressedCallback(true)
 
         })
 
-        NetworkService.create().getVet(UserSingleton.userID!!).enqueue(object: Callback<Vet>{
+        NetworkService.create().getVet(model.userSingleton.userID!!).enqueue(object: Callback<Vet>{
             override fun onFailure(call: Call<Vet>, t: Throwable) {
                 //PIJA
             }
@@ -90,8 +90,8 @@ class MakeConsultFragment : Fragment()//, OnBackPressedCallback(true)
 
 
         btnAddMeds.setOnClickListener {
-            val call = NetworkService.create().getMeds(UserSingleton.actualToken)
-            call.enqueue(object : retrofit2.Callback<List<Med>> {
+            val call = NetworkService.create().getMeds(model.userSingleton.actualToken!!)
+            call.enqueue(object : Callback<List<Med>> {
                 override fun onFailure(call: Call<List<Med>>, t: Throwable) {
 
                 }
@@ -133,7 +133,7 @@ class MakeConsultFragment : Fragment()//, OnBackPressedCallback(true)
         }
 
         btnAddVaccs.setOnClickListener{
-            val call = NetworkService.create().getVaccs(UserSingleton.actualToken)
+            val call = NetworkService.create().getVaccs(model.userSingleton.actualToken!!)
             call.enqueue(object : retrofit2.Callback<List<Vacc>> {
                 override fun onFailure(call: Call<List<Vacc>>, t: Throwable) {
 

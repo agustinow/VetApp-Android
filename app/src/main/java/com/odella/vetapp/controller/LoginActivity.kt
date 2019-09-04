@@ -11,11 +11,17 @@ import android.util.Base64
 import android.widget.Toast.LENGTH_SHORT
 import android.widget.Toast.makeText
 import androidx.lifecycle.ViewModelProviders
+import com.odella.vetapp.App
 import com.odella.vetapp.R
+import com.odella.vetapp.components.DaggerInfoComponent
+import com.odella.vetapp.components.InfoComponent
 import com.odella.vetapp.constants.*
 import com.odella.vetapp.model.TokenResponse
 import com.odella.vetapp.model.Vet
 import com.odella.vetapp.service.NetworkService
+import dagger.android.DaggerActivity_MembersInjector
+import dagger.android.DaggerApplication
+import dagger.android.DaggerApplication_MembersInjector
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -23,18 +29,21 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.security.Key
 import java.security.KeyStore
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.spec.GCMParameterSpec
+import javax.inject.Inject
 
 
 class LoginActivity : AppCompatActivity() {
     lateinit var model: LoginViewModel
     lateinit var preUsername: String
+    @Inject lateinit var userSingleton: UserSingleton
 
     @ExperimentalStdlibApi
-    private fun encryptAndSave(userIn: String){
+    fun encryptAndSave(userIn: String){
 
         if(userIn.isNotEmpty()) {
 
@@ -61,8 +70,6 @@ class LoginActivity : AppCompatActivity() {
             val bytesOfUser = userIn.encodeToByteArray()
             var encodedBytes = cipher.doFinal(bytesOfUser)
             var encryptedEncodedBytes = Base64.encodeToString(encodedBytes, Base64.NO_PADDING)
-
-
             getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                 .edit()
                 .putString(PREFS_USERNAME, encryptedEncodedBytes)
@@ -80,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     @ExperimentalStdlibApi
-    private fun decryptUsername() : String{
+    fun decryptUsername() : String{
         val iv = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getString(PREFS_IV, "")
         val encrypted = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getString(PREFS_USERNAME, "")
 
@@ -102,8 +109,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        model = ViewModelProviders.of(this@LoginActivity)[LoginViewModel::class.java]
+        App.appInjector.inject(this)
 
+        model = ViewModelProviders.of(this@LoginActivity)[LoginViewModel::class.java]
         //val username = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getString(PREFS_USERNAME, "")
         preUsername = decryptUsername()
 
@@ -119,7 +127,6 @@ class LoginActivity : AppCompatActivity() {
             }
             txtUsername.requestFocus()
         } else {
-            // PREVIOUS REMEMBER ME
             model.rememberMe = true
             chkRememberMe.isChecked = true
             var stringUsername = "${preUsername[0]}${preUsername[1]}"
@@ -127,7 +134,6 @@ class LoginActivity : AppCompatActivity() {
                 stringUsername = "$stringUsername*"
             }
             txtUsername.hint = stringUsername
-            //txtUsername.setText(username)
             txtPassword.requestFocus()
             btnLogIn.setOnClickListener {
                 model.username = if(txtUsername.text.isEmpty()){
@@ -173,9 +179,9 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                 if(response.code() == 200){
-                    UserSingleton.actualToken = "Bearer "  + response.body()!!.token
-                    UserSingleton.userType = response.body()!!.type
-                    UserSingleton.userID = response.body()!!.id
+                    userSingleton.actualToken = "Bearer "  + response.body()!!.token
+                    userSingleton.userType = response.body()!!.type!!
+                    userSingleton.userID = response.body()!!.id!!
                     login()
                 } else {
                     makeText(this@LoginActivity, "Invalid credentials", LENGTH_SHORT).show()
@@ -185,19 +191,16 @@ class LoginActivity : AppCompatActivity() {
             }
 
         })
-
     }
 
     @ExperimentalStdlibApi
     fun login(){
-
-        if(chkRememberMe.isChecked) {
-            if(txtUsername.text.isEmpty()) encryptAndSave(preUsername)
-            else encryptAndSave(txtUsername.text.toString())
-        } else {
-            encryptAndSave("")
-        }
-        val intent = when(UserSingleton.userType) {
+        val userIn = if(chkRememberMe.isChecked) {
+            if(txtUsername.text.isEmpty()) preUsername
+            else txtUsername.text.toString()
+        } else ""
+        encryptAndSave(userIn)
+        val intent = when(userSingleton.userType) {
             "vet" -> Intent(this@LoginActivity, VetActivity::class.java)
             "owner" -> TODO()
             "admin" -> TODO()
